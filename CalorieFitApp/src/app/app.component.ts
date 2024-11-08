@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { DataService } from './data.service';
+import {User} from './user';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -6,4 +9,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'CalorieFitApp';
+  users: User[] = [];
+  constructor(private dataService: DataService) {}
+  ngOnInit() {
+    this.dataService.getData().subscribe(data => {
+      console.log(data);
+    });
+    this.dataService.getUsers().subscribe(data => {
+      this.users = data;
+      console.log(this.users);
+    });
+  }
 }
