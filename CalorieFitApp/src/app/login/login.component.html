@@ -1,1 +1,54 @@
-<p>login works!</p>
+<div class="login-container">
+  <div class="login-box">
+    <div>
+      <h2 class="text-center text-primary">Login</h2>
+    </div>
+    <div class="login-form">
+      <form
+        [formGroup]="LoginForm"
+        (ngSubmit)="Login()"
+        [ngClass]="{ 'was-validated': submitted }"
+        novalidate
+      >
+        <div class="form-group mb-3">
+          <label class="form-label" for="email">Email</label>
+          <input
+            type="text"
+            formControlName="email"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': isFieldInvalid('email') }"
+            placeholder="Email Address"
+            required
+          />
+          <div *ngIf="isFieldInvalid('email')" class="invalid-feedback">
+            <small *ngIf="LoginForm.get('email')?.errors?.['required']">
+              Email is required.
+            </small>
+            <small *ngIf="LoginForm.get('email')?.errors?.['email']">
+              Please enter a valid email address.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group mb-3">
+          <label class="form-label" for="password">Password</label>
+          <input
+            type="password"
+            formControlName="password"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': isFieldInvalid('password') }"
+            placeholder="Password"
+            required
+          />
+          <div *ngIf="isFieldInvalid('password')" class="invalid-feedback">
+            <small>Password is required.</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary w-100">Login &#8594;</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -12,12 +12,12 @@ export class AppComponent {
   users: User[] = [];
   constructor(private dataService: DataService) {}
   ngOnInit() {
-    this.dataService.getData().subscribe(data => {
-      console.log(data);
-    });
+    // this.dataService.getData().subscribe(data => {
+    //   console.log(data);
+    // });
     this.dataService.getUsers().subscribe(data => {
       this.users = data;
-      console.log(this.users);
+      //console.log(this.users);
     });
   }
 }
