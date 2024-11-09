@@ -25,17 +25,33 @@ async function getUsers() {
     return [];
   }
 }
+async function addUser(user) {
+  try {
+    const hashedPassword = await bcrypt.hash(user.password, 10);
+    const conn = await pool.getConnection();
+    const result = await conn.query('INSERT INTO user (email, password) VALUES (?, ?)', [user.email, hashedPassword]);
+    conn.release();
+    console.log('User added:', result);
+    return result;
+  } catch (error) {
+    console.error('Database connection failed:', error);
+    return [];
+  }
+}
+
+// Add a new user
+// const user = { email: 'omar@gmail.com', password: '123456' };
+// addUser(user)
 
 // Login validation
 app.post('/api/login', async (req, res) => {
-  console.log(req)
   const { email, password } = req.body;
   try {
     const conn = await pool.getConnection();
     const [user] = await conn.query('SELECT * FROM user WHERE email = ?', [email]);
     conn.release();
-    //await bcrypt.compare( )
-    if (user && password == user.password) {
+    //
+    if (user && await bcrypt.compare(password, user.password)) {
       res.status(200).json({ message: 'Login successful' });
     } else {
       res.status(401).json({ error: `Invalid credentials` });
