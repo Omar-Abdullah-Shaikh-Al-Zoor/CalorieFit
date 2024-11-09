@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-login',
@@ -7,23 +8,33 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  //public email: string = '';
-  submitted = false;
+  submitted: boolean = false;
+  email: string = '';
   password: string = '';
-  
+  message: string = '';
+
   LoginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', Validators.required),
   });
-  constructor() {}
+  constructor(private dataService: DataService) {}
  // Triggered when form is submitted
-  Login(): void {
+  login() {
     this.submitted = true;
-    if (this.LoginForm.valid) {
-      console.log(this.LoginForm.value.email, this.LoginForm.value.password);
-      console.log('Form submitted');
-      // You can add further login logic here
-    }
+    if (this.LoginForm.invalid) return;
+
+    const email = this.LoginForm.get('email')?.value || '';
+    const password = this.LoginForm.get('password')?.value || '';
+    this.dataService.login(email, password).subscribe({
+      next: (response) => {
+        console.log(response);
+        this.message = response.message;
+      },
+      error: (error) => {
+        console.log(error);
+        this.message = error.error;
+      }
+    });
   }
 
   // Helper method to check if a form field is invalid after submission

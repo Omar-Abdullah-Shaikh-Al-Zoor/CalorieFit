@@ -6,7 +6,7 @@
     <div class="login-form">
       <form
         [formGroup]="LoginForm"
-        (ngSubmit)="Login()"
+        (ngSubmit)="login()"
         [ngClass]="{ 'was-validated': submitted }"
         novalidate
       >

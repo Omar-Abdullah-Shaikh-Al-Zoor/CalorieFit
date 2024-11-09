@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const mariadb = require('mariadb');
 const cors = require('cors');
+const bcrypt = require('bcrypt');
 
 const app = express();
 const pool = mariadb.createPool({
@@ -25,8 +26,24 @@ async function getUsers() {
   }
 }
 
-app.get('/api/data', (req, res) => {
-  res.json({ message: "Hello from Node.js backend!" });
+// Login validation
+app.post('/api/login', async (req, res) => {
+  console.log(req)
+  const { email, password } = req.body;
+  try {
+    const conn = await pool.getConnection();
+    const [user] = await conn.query('SELECT * FROM user WHERE email = ?', [email]);
+    conn.release();
+    //await bcrypt.compare( )
+    if (user && password == user.password) {
+      res.status(200).json({ message: 'Login successful' });
+    } else {
+      res.status(401).json({ error: `Invalid credentials` });
+    }
+  } catch (error) {
+    console.error('Login error:', error);
+    res.status(500).json({ error: 'Login failed' });
+  }
 });
 
 app.get('/api/data/users', async (req, res) => {
@@ -38,19 +55,6 @@ app.get('/api/data/users', async (req, res) => {
     res.status(500).json({ error: 'Failed to retrieve users' });
   }
 });
-  //const result = await pool.query("SELECT 1 as val");
- // console.log(result);
-  /*let conn;
-  try {
-    conn = await pool.getConnection();
-    const rows = await conn.query("SELECT * FROM your_table");
-    res.json(rows);
-  } catch (error) {
-    res.status(500).json({ error: 'Database error' });
-  } finally {
-    if (conn) conn.release();
-  }*/
-  //res.render('./src/index.html');
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

@@ -7,15 +7,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DataService {
-  private apiUrl = 'http://localhost:5000/api/data';
+  private apiUrl = 'http://localhost:5000/api';
 
   constructor(private http: HttpClient) {}
 
-  getData(): Observable<any> {
-    return this.http.get(this.apiUrl);
-  }
-  getUsers(): Observable<any> {
-    console.log(this.http.get(this.apiUrl + '/users'))
-    return this.http.get(this.apiUrl + '/users');
+  login(email: string, password: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/login`, { email, password });
   }
 }
