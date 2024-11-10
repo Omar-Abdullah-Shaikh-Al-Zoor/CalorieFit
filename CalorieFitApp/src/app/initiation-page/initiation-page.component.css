@@ -1,0 +1,179 @@
+/* Define CSS variables for the default purple theme */
+/* :root {
+  --primary-color: #6f42c1;
+  --secondary-color: #a98eda;
+  --background-color: #212529;
+  --text-color: #ffffff;
+  --button-hover-color: #5a3e9c;
+  --result-text-color: #d0bfff;
+} */
+
+/* Uncomment this section for a blue theme */
+
+/* :root {
+  --primary-color: #007bff;
+  --secondary-color: #85c1ff;
+  --background-color: #001f3f;
+  --text-color: #ffffff;
+  --button-hover-color: #0056b3;
+  --result-text-color: #80d0ff;
+} */
+
+
+/* Uncomment this section for an orange theme */
+/*
+:root {
+  --primary-color: #fd7e14;
+  --secondary-color: #ffc078;
+  --background-color: #3a1d08;
+  --text-color: #ffffff;
+  --button-hover-color: #e8590c;
+  --result-text-color: #ffd8a8;
+}
+*/
+
+/* Uncomment this section for a white theme */
+/*
+:root {
+  --primary-color: #ffffff;
+  --secondary-color: #cccccc;
+  --background-color: #f8f9fa;
+  --text-color: #212529;
+  --button-hover-color: #b3b3b3;
+  --result-text-color: #6c757d;
+}
+*/
+
+/* Uncomment this section for a black theme */
+/*
+:root {
+  --primary-color: #000000;
+  --secondary-color: #333333;
+  --background-color: #121212;
+  --text-color: #e0e0e0;
+  --button-hover-color: #1a1a1a;
+  --result-text-color: #cccccc;
+}
+*/
+
+/* Uncomment this section for a red theme */
+
+/* :root {
+  --primary-color: #dc3545;
+  --secondary-color: #ff6b6b;
+  --background-color: #58151c;
+  --text-color: #ffffff;
+  --button-hover-color: #a71d2a;
+  --result-text-color: #ffb3b3;
+} */
+
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #212529;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+
+.main-container {
+  width: 100%;
+  height: 100vh; /* Full viewport height */
+  margin: 0;
+
+
+  min-height: 100vh;
+  background: linear-gradient(135deg, #212529 0%, #0056b3 100%);
+  
+  padding: 0; /* Remove padding to eliminate outer whitespace */
+  display: flex;
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
+}
+
+.question-container {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  max-width: 500px;
+  width: 90%;
+  margin: 0; /* Remove margin to eliminate outer whitespace */
+}
+
+.text-purple {
+  color: #a98eda;
+  font-size: 2rem;
+  margin-bottom: 30px;
+  text-align: center; /* Center text in case of any margin issues */
+}
+
+.btn-purple {
+  background-color: #6f42c1;
+  border: none;
+  color: white;
+  padding: 15px 30px;
+  font-size: 1.1rem;
+  margin: 10px;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+}
+
+.btn-purple:hover {
+  background-color: #5a3e9c;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.form-control {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 2px solid #6f42c1;
+  color: white;
+  padding: 15px;
+  margin-bottom: 20px;
+  width: 100%;
+  border-radius: 50px;
+  font-size: 1rem;
+}
+
+.form-control::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.result-text {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  color: #d0bfff;
+}
+
+@media (max-width: 768px) {
+  .question-container {
+    padding: 30px;
+  }
+
+  .text-purple {
+    font-size: 1.7rem;
+  }
+
+  .btn-purple {
+    padding: 12px 24px;
+    font-size: 1rem;
+  }
+}

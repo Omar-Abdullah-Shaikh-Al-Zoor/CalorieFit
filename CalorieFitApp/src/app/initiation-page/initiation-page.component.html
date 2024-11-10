@@ -1,0 +1,44 @@
+<div class="main-container d-flex flex-column justify-content-center align-items-center">
+  <div *ngIf="step === 1" class="question-container text-center">
+    <h2 class="text-purple">Choose Your Fitness Goal</h2>
+    <div class="button-group">
+      <button class="btn btn-purple btn-lg" (click)="selectGoal('weight loss')">Weight Loss</button>
+      <button class="btn btn-purple btn-lg" (click)="selectGoal('weight gain')">Weight Gain</button>
+      <button class="btn btn-purple btn-lg" (click)="selectGoal('weight maintenance')">Weight Maintenance</button>
+    </div>
+  </div>
+
+  <div *ngIf="step === 2" class="question-container text-center">
+    <h2 class="text-purple">Select Your Gender</h2>
+    <div class="button-group">
+      <button class="btn btn-purple btn-lg" (click)="selectGender('male')">Male</button>
+      <button class="btn btn-purple btn-lg" (click)="selectGender('female')">Female</button>
+    </div>
+  </div>
+
+  <div *ngIf="step === 3" class="question-container text-center">
+    <h2 class="text-purple">Enter Your Vital Statistics</h2>
+    <form (ngSubmit)="submitForm()" class="d-flex flex-column align-items-center">
+      <div class="form-group">
+        <input type="number" id="age" [(ngModel)]="age" name="age" required min="1" max="100" placeholder="Enter your age (1-100)" class="form-control" />
+      </div>
+      
+      <div class="form-group">
+        <input type="number" id="weight" [(ngModel)]="weight" name="weight" required min="20" max="700" placeholder="Enter your weight in KGs (20 - 700)" class="form-control" />
+      </div>
+      
+      <div class="form-group">
+        <input type="number" id="height" [(ngModel)]="height" name="height" required min="50" max="300" placeholder="Enter your height in Centimeters (50 - 300)" class="form-control" />
+      </div>
+      
+      <button type="submit" class="btn btn-purple btn-lg">Submit</button>
+    </form>
+  </div>
+
+  <div *ngIf="step > 3" class="question-container text-center">
+    <h2 class="text-purple">Your Results</h2>
+    <p class="result-text">Daily Caloric Expenditure: {{ dailyCaloricExpenditure }} kcal/day</p>
+    <p class="result-text">Daily Protein Intake: {{ dailyProteinIntake }} grams</p>
+    <p class="result-text">Daily Carbohydrate Intake: {{ dailyCarbIntake }} grams</p>
+  </div>
+</div>
