@@ -18,20 +18,65 @@
 
   <div *ngIf="step === 3" class="question-container text-center">
     <h2 class="text-purple">Enter Your Vital Statistics</h2>
-    <form (ngSubmit)="submitForm()" class="d-flex flex-column align-items-center">
+    <form (ngSubmit)="submitForm()" class="d-flex flex-column align-items-center" #form="ngForm">
       <div class="form-group">
-        <input type="number" id="age" [(ngModel)]="age" name="age" required min="1" max="100" placeholder="Enter your age (1-100)" class="form-control" />
+        <input 
+          type="number" 
+          id="age" 
+          [(ngModel)]="age" 
+          name="age" 
+          required 
+          min="1" 
+          max="100" 
+          placeholder="Enter your age (1-100)" 
+          class="form-control" 
+          #ageInput="ngModel"
+        />
+        <div *ngIf="ageInput.invalid && (ageInput.dirty || ageInput.touched)" class="error-message">
+          <span *ngIf="ageInput.errors?.['required']">Age is required.</span>
+          <span *ngIf="ageInput.errors?.['min'] || ageInput.errors?.['max']">Age must be between 1 and 100.</span>
+        </div>
       </div>
-      
+
       <div class="form-group">
-        <input type="number" id="weight" [(ngModel)]="weight" name="weight" required min="20" max="700" placeholder="Enter your weight in KGs (20 - 700)" class="form-control" />
+        <input 
+          type="number" 
+          id="weight" 
+          [(ngModel)]="weight" 
+          name="weight" 
+          required 
+          min="20" 
+          max="700" 
+          placeholder="Enter your weight in KGs (20 - 700)" 
+          class="form-control" 
+          #weightInput="ngModel"
+        />
+        <div *ngIf="weightInput.invalid && (weightInput.dirty || weightInput.touched)" class="error-message">
+          <span *ngIf="weightInput.errors?.['required']">Weight is required.</span>
+          <span *ngIf="weightInput.errors?.['min'] || weightInput.errors?.['max']">Weight must be between 20 and 700 KGs.</span>
+        </div>
       </div>
-      
+
       <div class="form-group">
-        <input type="number" id="height" [(ngModel)]="height" name="height" required min="50" max="300" placeholder="Enter your height in Centimeters (50 - 300)" class="form-control" />
+        <input 
+          type="number" 
+          id="height" 
+          [(ngModel)]="height" 
+          name="height" 
+          required 
+          min="50" 
+          max="300" 
+          placeholder="Enter your height in Centimeters (50 - 300)" 
+          class="form-control" 
+          #heightInput="ngModel"
+        />
+        <div *ngIf="heightInput.invalid && (heightInput.dirty || heightInput.touched)" class="error-message">
+          <span *ngIf="heightInput.errors?.['required']">Height is required.</span>
+          <span *ngIf="heightInput.errors?.['min'] || heightInput.errors?.['max']">Height must be between 50 and 300 cm.</span>
+        </div>
       </div>
-      
-      <button type="submit" class="btn btn-purple btn-lg">Submit</button>
+
+      <button type="submit" class="btn btn-purple btn-lg" [disabled]="form.invalid">Submit</button>
     </form>
   </div>
 
