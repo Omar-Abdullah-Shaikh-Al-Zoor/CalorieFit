@@ -51,10 +51,15 @@ app.post('/api/login', async (req, res) => {
     const [user] = await conn.query('SELECT * FROM user WHERE email = ?', [email]);
     conn.release();
     //
-    if (user && await bcrypt.compare(password, user.password)) {
-      res.status(200).json({ message: 'Login successful' });
-    } else {
-      res.status(401).json({ error: `Invalid credentials` });
+    if (user) {
+      if (await bcrypt.compare(password, user.password)) {
+        res.status(200).json({ message: 'Login successful' });
+      } else {
+        res.status(401).json({ error: `Incorrect Password` });
+      } 
+    }
+      else {
+      res.status(401).json({ error: `The Email entered is not assciated with any account` });
     }
   } catch (error) {
     console.error('Login error:', error);

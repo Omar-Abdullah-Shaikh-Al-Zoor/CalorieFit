@@ -87,6 +87,32 @@
   cursor: not-allowed;
   opacity: 0.7;
 }
+/* Styles to enhance the dialog appearance */
+#errorDialog {
+  width: 100%; /* Full width of the page */
+  max-width: 500px; /* Limit width for better readability */
+  max-height: 300px; /* Auto height based on content */
+  position: fixed;
+  top: 20px; /* Place the dialog near the top */
+  left: 50%;
+  transform: translateX(-50%); /* Center the dialog horizontally */
+  z-index: 1050; /* Higher z-index to appear on top of other content */
+  border-radius: 8px; /* Rounded corners for a modern look */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+  padding: 0; /* Reset default padding */
+  overflow: hidden; /* Ensure rounded corners */
+}
+
+/* Optional: Add a backdrop effect */
+#errorDialog::backdrop {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
 /* Responsive Design */
 @media (max-width: 480px) {
