@@ -17,6 +17,16 @@
   </div>
 
   <div *ngIf="step === 3" class="question-container text-center">
+    <h2 class="text-purple">How Often Can You Work Out?</h2>
+    <div class="button-group">
+      <button class="btn btn-purple btn-lg" (click)="selectWeeklyAvailability('once a week')">Once a week</button>
+      <button class="btn btn-purple btn-lg" (click)="selectWeeklyAvailability('three days a week')">Three days a week</button>
+      <button class="btn btn-purple btn-lg" (click)="selectWeeklyAvailability('four days a week')">Four days a week</button>
+      <button class="btn btn-purple btn-lg" (click)="selectWeeklyAvailability('six days a week')">Six days a week</button>
+    </div>
+  </div>
+
+  <div *ngIf="step === 4" class="question-container text-center">
     <h2 class="text-purple">Enter Your Vital Statistics</h2>
     <form (ngSubmit)="submitForm()" class="d-flex flex-column align-items-center" #form="ngForm">
       <div class="form-group">
@@ -80,7 +90,7 @@
     </form>
   </div>
 
-  <div *ngIf="step > 3" class="question-container text-center">
+  <div *ngIf="step > 4" class="question-container text-center">
     <h2 class="text-purple">Your Results</h2>
     <p class="result-text">Daily Caloric Expenditure: {{ dailyCaloricExpenditure }} kcal/day</p>
     <p class="result-text">Daily Protein Intake: {{ dailyProteinIntake }} grams</p>
