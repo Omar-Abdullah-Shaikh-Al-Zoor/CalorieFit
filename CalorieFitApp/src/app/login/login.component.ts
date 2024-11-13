@@ -35,7 +35,7 @@ export class LoginComponent {
       next: (response) => {
         this.submitted = true;
         this.message = response.message;
-        this.router.navigate(['/home']);
+        this.navigateTo('/home');
       },
       error: (error) => {
         console.log(error.error.error);
@@ -62,5 +62,9 @@ export class LoginComponent {
       dialog.close();
     }
     this.error = '';
+  }
+
+  navigateTo(path: string) {
+    this.router.navigate([path]);
   }
 }
