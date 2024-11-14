@@ -43,10 +43,19 @@ body, html {
   text-align: center; /* Center text in case of any margin issues */
 }
 
+.form-group {
+  margin-bottom: 30px; /* Add spacing between input fields and error messages */
+  position: relative;
+}
+
+.form-control {
+  margin-bottom: 5px; /* Add spacing between input field and error message */
+}
+
 .error-message {
   color: red;
   font-size: 0.9em;
-  margin-top: 5px;
+  text-align: center; /* Center the error messages */
 }
 
 .btn-purple {
