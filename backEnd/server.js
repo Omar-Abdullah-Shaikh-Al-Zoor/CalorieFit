@@ -59,7 +59,7 @@ app.post('/api/login', async (req, res) => {
       } 
     }
       else {
-      res.status(401).json({ error: `The Email entered is not assciated with any account` });
+      res.status(401).json({ error: `The Email entered is not associated with any account` });
     }
   } catch (error) {
     console.error('Login error:', error);

@@ -2,7 +2,7 @@
   <div class="login-container">
     <div class="login-box">
       <div>
-        <h2 class="text-center text-primary">Login</h2>
+        <h2 class="text-center text-primary">Login to CalorieFit</h2>
       </div>
       <div class="login-form">
         <form
@@ -40,6 +40,7 @@
               type="password"
               formControlName="password"
               class="form-control"
+              id="password"
               [ngClass]="{
                 'is-invalid': isFieldInvalid('password'),
                 'is-valid': !LoginForm.get('password')?.errors?.['required']
@@ -51,10 +52,13 @@
               <small>Password is required.</small>
             </div>
           </div>
-          <div class="mb-3">
-            <a class="text-primary" (click)="navigateTo('/forget-password')"> Forget Password</a>
-            <br />
-            <a class="text-primary" (click)="navigateTo('/register')">Don't have an account?</a>
+          <div class="mt-4 mb-3">
+            <div class="my-2">
+              <a class="text-primary my-2" (click)="navigateTo('/forget-password')"> Forget Password</a>
+            </div>
+            <div class="my-2">
+              <a class="text-primary  mt-1" (click)="navigateTo('/register')">Don't have an account?</a>
+            </div>
           </div>
 
           <div class="form-group">

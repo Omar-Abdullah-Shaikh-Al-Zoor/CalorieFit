@@ -22,6 +22,11 @@ export class LoginComponent {
   // Triggered when form is submitted
   login() {
     if (this.LoginForm.invalid) {
+      for (const key in this.LoginForm.controls) {
+        if (this.LoginForm.get(key)?.invalid) {
+          this.LoginForm.get(key)?.markAsTouched(); // Mark field as touched if invalid
+        }
+      }
       this.submitted = false;
       return;
     }
