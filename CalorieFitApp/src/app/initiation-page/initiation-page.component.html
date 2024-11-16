@@ -90,10 +90,14 @@
     </form>
   </div>
 
-  <div *ngIf="step > 4" class="question-container text-center">
+  <div style="text-align: center;" *ngIf="step > 4" class="question-container text-center">
     <h2 class="text-purple">Your Results</h2>
     <p class="result-text">Daily Caloric Expenditure: {{ dailyCaloricExpenditure }} kcal/day</p>
     <p class="result-text">Daily Protein Intake: {{ dailyProteinIntake }} grams</p>
     <p class="result-text">Daily Carbohydrate Intake: {{ dailyCarbIntake }} grams</p>
+
+    <button type="submit" class="btn btn-purple btn-lg">Generate Diet Plan</button>
+
   </div>
+
 </div>

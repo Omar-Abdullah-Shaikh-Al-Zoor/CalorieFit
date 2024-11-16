@@ -90,6 +90,10 @@ body, html {
   color: rgba(255, 255, 255, 0.7);
 }
 
+.btn-center {
+  margin: 0 auto;
+}
+
 .button-group {
   display: flex;
   flex-direction: column;
