@@ -42,7 +42,7 @@ export class InitiationPageComponent {
 
   // Function to handle form submission
   submitForm(): void {
-    this.onSubmit(); // Call the onSubmit method to perform calculations and update userDetails
+    this.calorieCalculate(); // Call the calorieCalculate method to perform calculations and update userDetails
     this.step++; // Move to the next step or show results after submitting
   }
   
@@ -51,7 +51,7 @@ export class InitiationPageComponent {
     this.step++;
   }
 
-  onSubmit() {
+  calorieCalculate() {
     if (this.gender && this.weight && this.height && this.age) {
       if (this.gender === 'male') {
         this.dailyCaloricExpenditure = Math.round(((10 * this.weight) + (6.25 * this.height) - (5 * this.age) + 5) * 1.375);
