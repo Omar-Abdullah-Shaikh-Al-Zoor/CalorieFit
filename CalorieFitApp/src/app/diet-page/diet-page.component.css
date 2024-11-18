@@ -1,40 +1,40 @@
-div.container {
+div.dp-container {
     background: linear-gradient(to bottom, #000306, #02c0ff, #3746f1); /* Blue gradient */
     margin: 0;
     padding: 0;
     height: 100%;
     overflow: hidden;
-  
+
   }
-  
+
   .diet-plan {
     font-family: Arial, sans-serif;
     line-height: 1.6;
     margin: 20px;
     color: white;
   }
-  
+
   header {
     text-align: center;
     margin-bottom: 40px;
   }
-  
+
   header h1 {
     font-size: 2.5em;
     color: #ffffff;
   }
-  
+
   header p {
     font-size: 1.2em;
     color: #dcdcdc;
   }
-  
+
   .user-info {
     display: flex;
     justify-content: space-around;
     margin-bottom: 40px;
   }
-  
+
   .user-info div {
     background-color: rgba(255, 255, 255, 0.1);
     padding: 20px;
@@ -42,41 +42,41 @@ div.container {
     width: 45%;
     text-align: center;
   }
-  
+
   .user-info h2 {
     color: #ffffff;
   }
-  
+
   .workout-plan {
     margin-top: 20px;
   }
-  
+
   .workout-plan h2 {
     color: #ffffff;
     text-align: center;
     margin-bottom: 20px;
   }
-  
+
   .calorie-range {
     background-color: rgba(255, 255, 255, 0.1);
     padding: 20px;
     border-radius: 10px;
     margin-bottom: 20px;
   }
-  
+
   .calorie-range h3 {
     color: #ffffff;
   }
-  
+
   .calorie-range p {
     color: #dcdcdc;
   }
-  
+
   .workout-button {
     text-align: center;
     margin-top: 40px;
   }
-  
+
   .workout-button button {
     padding: 10px 20px;
     font-size: 16px;
@@ -89,12 +89,11 @@ div.container {
     display: inline-flex;
     align-items: center;
   }
-  
+
   .workout-button button:hover {
     background-color: #1c86ee;
   }
-  
+
   .workout-button button i {
     margin-left: 8px;
   }
-  
