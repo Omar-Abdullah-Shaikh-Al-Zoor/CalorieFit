@@ -8,13 +8,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DietPageComponent } from './diet-page/diet-page.component';
 import { InitiationPageComponent } from './initiation-page/initiation-page.component';
 import { FormsModule } from '@angular/forms';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     DietPageComponent,
-    InitiationPageComponent
+    InitiationPageComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
