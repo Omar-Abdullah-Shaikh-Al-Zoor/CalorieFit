@@ -1,0 +1,118 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #007bff;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+
+.main-container {
+  width: 100%;
+  height: 100vh; /* Full viewport height */
+  margin: 0;
+
+
+  min-height: 100vh;
+  background: linear-gradient(135deg, #212529 0%, #0056b3 100%);
+  
+  padding: 0; /* Remove padding to eliminate outer whitespace */
+  display: flex;
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
+}
+
+
+.question-container {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  max-width: 500px;
+  width: 90%;
+  margin: 0; /* Remove margin to eliminate outer whitespace */
+}
+
+.text-purple {
+  color: #fff;
+  font-size: 2rem;
+  margin-bottom: 30px;
+  text-align: center; /* Center text in case of any margin issues */
+}
+
+.form-group {
+  margin-bottom: 30px; /* Add spacing between input fields and error messages */
+  position: relative;
+}
+
+.form-control {
+  margin-bottom: 5px; /* Add spacing between input field and error message */
+}
+
+.error-message {
+  color: red;
+  font-size: 0.9em;
+  text-align: center; /* Center the error messages */
+}
+
+.btn-purple {
+  background-color: #6b6d70;
+  border: none;
+  color: white;
+  padding: 15px 30px;
+  font-size: 1.1rem;
+  margin: 10px;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+}
+
+.btn-purple:hover {
+  background-color: #5a3e9c;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.form-control {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 2px solid #6f42c1;
+  color: white;
+  padding: 15px;
+  margin-bottom: 20px;
+  width: 100%;
+  border-radius: 50px;
+  font-size: 1rem;
+}
+
+.form-control::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.result-text {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  color: #85c1ff;
+}
+
+@media (max-width: 768px) {
+  .question-container {
+    padding: 30px;
+  }
+
+  .text-purple {
+    font-size: 1.7rem;
+  }
+
+  .btn-purple {
+    padding: 12px 24px;
+    font-size: 1rem;
+  }
+}

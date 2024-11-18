@@ -6,21 +6,24 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DietPageComponent } from './diet-page/diet-page.component';
+import { InitiationPageComponent } from './initiation-page/initiation-page.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     DietPageComponent,
+    InitiationPageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
-    provideClientHydration(),
-    provideHttpClient(withFetch()) // Enable fetch for HttpClient
+    provideClientHydration()
   ],
   bootstrap: [AppComponent]
 })
