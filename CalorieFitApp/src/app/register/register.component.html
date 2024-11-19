@@ -1,1 +1,95 @@
-<p>register works!</p>
+<div>
+  <div class="register-container">
+    <div class="register-box">
+      <div>
+        <h2 class="text-center text-primary">Welcome to CalorieFit</h2>
+        <p class="text-center">Create your account to start tracking your fitness journey</p>
+      </div>
+      <div class="register-form">
+        <form [formGroup]="RegisterForm" (ngSubmit)="register()" [ngClass]="{ 'was-validated': submitted }" novalidate>
+          <div class="d-flex gap-4">
+          <!-- First Name -->
+          <div class="form-group mb-3">
+            <label class="form-label" for="firstName">First Name</label>
+            <input type="text" formControlName="firstName" class="form-control"
+              [ngClass]="{'is-invalid': isFieldInvalid('firstName')}" placeholder="First Name" required />
+            <div *ngIf="isFieldInvalid('firstName')" class="invalid-feedback">
+              <small>First name is required.</small>
+            </div>
+          </div>
+
+          <!-- Last Name -->
+          <div class="form-group mb-3">
+            <label class="form-label" for="lastName">Last Name</label>
+            <input type="text" formControlName="lastName" class="form-control"
+              [ngClass]="{'is-invalid': isFieldInvalid('lastName')}" placeholder="Last Name" required />
+            <div *ngIf="isFieldInvalid('lastName')" class="invalid-feedback">
+              <small>Last name is required.</small>
+            </div>
+          </div>
+          </div>
+
+          <!-- Email -->
+          <div class="form-group mb-3">
+            <label class="form-label" for="email">Email</label>
+            <input type="text" id="email" formControlName="email" class="form-control"
+              [ngClass]="{'is-invalid': isFieldInvalid('email'),
+                        'is-valid': !RegisterForm.get('email')?.errors?.['required'] && !RegisterForm.get('email')?.errors?.['email']}"
+              placeholder="Email Address" required />
+            <div *ngIf="isFieldInvalid('email')" class="invalid-feedback">
+              <small *ngIf="RegisterForm.get('email')?.errors?.['required']">Email is required.</small>
+              <small *ngIf="RegisterForm.get('email')?.errors?.['email']">Please enter a valid email address.</small>
+            </div>
+          </div>
+
+          <div class="d-flex gap-4">
+            <!-- Password -->
+            <div class="form-group mb-3">
+              <label class="form-label" for="password">Password</label>
+              <input type="password" formControlName="password" class="form-control"
+                [ngClass]="{'is-invalid': isFieldInvalid('password')}" placeholder="Password" required />
+              <div *ngIf="isFieldInvalid('password')" class="invalid-feedback">
+                <small>Password is required.</small>
+              </div>
+            </div>
+
+            <!-- Password -->
+            <div class="form-group mb-3">
+              <label class="form-label" for="confirm-password">Confirm Password</label>
+              <input type="password" formControlName="confirmPassword" class="form-control"
+                [ngClass]="{'is-invalid': isFieldInvalid('confirmPassword')}" placeholder="Confirm Password" required />
+              <div *ngIf="isFieldInvalid('confirmPassword')" class="invalid-feedback">
+                <small>Password is required.</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- Date of Birth -->
+          <div class="form-group mb-3">
+            <label class="form-label" for="dateOfBirth">Date of Birth</label>
+            <input type="date" formControlName="dateOfBirth" class="form-control"
+              [ngClass]="{'is-invalid': isFieldInvalid('dateOfBirth')}" required />
+          </div>
+
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary w-100">Register &#8594;</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <dialog id="errorDialog" class="bg-white border-0 shadow">
+    <div class="modal-header bg-danger text-white">
+      <h5 class="modal-title m-2">Register Error</h5>
+      <button type="button" class="btn-close btn-close-white m-2" (click)="closeErrorDialog()"></button>
+    </div>
+    <div class="modal-body">
+      <p class="text-left m-3">{{ error }}</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary w-25 m-2" (click)="closeErrorDialog()">Close</button>
+    </div>
+  </dialog>
+</div>
