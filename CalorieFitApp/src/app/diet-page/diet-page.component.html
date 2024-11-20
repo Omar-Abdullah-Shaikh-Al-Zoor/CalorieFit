@@ -1,54 +1,338 @@
-<div class="container">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calorie Fit</title>
+  <style>
+    .calorie-range {
+      display: none; /* Hide all calorie ranges by default */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="diet-plan">
+      <header>
+        <h1>Calorie Fit</h1>
+        <p>Eat right, be bright!</p>
+      </header>
 
-  <div class="diet-plan">
-    <header>
-      <h1>Calorie Fit</h1>
-      <p>Eat right, be bright!</p>
-    </header>
+      <div class="user-info">
+        <div class="calorie-loss">
+          <h2>Calorie Loss</h2>
+          <p>Track your daily calorie loss here.</p>
+          <input type="number" placeholder="Enter calories to lose" id="calorie-loss-input">
+          <button type="button" onclick="showMealPlan()">Track</button>
+          <p id="calorie-loss-result"></p>
+        </div>
+      </div>
 
-    <div class="user-info">
-      <div class="calorie-loss">
-        <h2>Calorie Loss</h2>
-        <p>Track your daily calorie loss here.</p>
-      </div>
-      <div class="protein-needs">
-        <h2>Protein Needs</h2>
-        <p>Calculate your daily protein requirements.</p>
-      </div>
-    </div>
+      <div class="workout-plan">
+        <h2>Workout Plan</h2>
+        
+        <!-- 1000 Calories -->
+        <div class="calorie-range" id="range-1000">
+          <h3>1000 Calories</h3>
+          <h4>Breakfast: Oatmeal with Berries</h4>
+          <p>Ingredients:</p>
+          <ul>
+            <li>Oatmeal (1 cup)</li>
+            <li>Mixed berries (1/2 cup)</li>
+            <li>Honey (1 tbsp)</li>
+          </ul>
+          <p>Calories: ~300</p>
+          <p>Protein: ~10g</p>
 
-    <div class="workout-plan">
-      <h2>Workout Plan</h2>
-      <div class="calorie-range">
-        <h3>1000-2000 Calories</h3>
-        <p>Diet plan for this calorie range.</p>
-      </div>
-      <div class="calorie-range">
-        <h3>2000-3000 Calories</h3>
-        <p>Diet plan for this calorie range.</p>
-      </div>
-      <div class="calorie-range">
-        <h3>3000-4000 Calories</h3>
-        <p>Diet plan for this calorie range.</p>
-      </div>
-      <div class="calorie-range">
-        <h3>4000-5000 Calories</h3>
-        <p>Diet plan for this calorie range.</p>
-      </div>
-      <div class="calorie-range">
-        <h3>5000-6000 Calories</h3>
-        <p>Diet plan for this calorie range.</p>
-      </div>
-      <div class="calorie-range">
-        <h3>6000-7000 Calories</h3>
-        <p>Diet plan for this calorie range.</p>
-      </div>
-    </div>
+          <h4>Lunch: Grilled Chicken Salad</h4>
+          <p>Ingredients:</p>
+          <ul>
+            <li>Grilled chicken breast (4 oz)</li>
+            <li>Mixed greens (2 cups)</li>
+            <li>Olive oil dressing (2 tbsp)</li>
+          </ul>
+          <p>Calories: ~400</p>
+          <p>Protein: ~30g</p>
 
-    <div class="workout-button">
-      <button type="button" aria-label="Workout Plan">
-        Workout Plan <i class="fas fa-arrow-right"></i>
-      </button>
+          <h4>Dinner: Vegetable Stir Fry</h4>
+          <p>Ingredients:</p>
+          <ul>
+            <li>Mixed vegetables (2 cups)</li>
+            <li>Tofu (4 oz)</li>
+            <li>Soy sauce (2 tbsp)</li>
+          </ul>
+          <p>Calories: ~300</p>
+          <p>Protein: ~20g</p>
+          <p>Total Protein: ~60g</p>
+        </div>
+
+        <!-- 2000 Calories -->
+        <div class="calorie-range" id="range-2000">
+          <h3>2000 Calories</h3>
+          <h4>Breakfast: Avocado Toast with Eggs</h4>
+          <p>Ingredients:</p>
+          <ul>
+            <li>Whole grain bread (2 slices)</li>
+            <li>Avocado (1/2)</li>
+            <li>Eggs (2)</li>
+          </ul>
+          <p>Calories: ~500</p>
+          <p>Protein: ~20g</p>
+
+          <h4>Lunch: Turkey Sandwich with Soup</h4>
+          <p>Ingredients:</p>
+          <ul>
+            <li>Turkey breast (4 oz)</li>
+            <li>Whole grain bread (2 slices)</li>
+            <li>Vegetable soup (1 cup)</li>
+          </ul>
+          <p>Calories: ~700</p>
+          <p>Protein: ~40g</p>
+
+          <h4>Dinner: Grilled Salmon with Quinoa</h4>
+          <p>Ingredients:</p>
+          <ul>
+            <li>Salmon fillet (6 oz)</li>
+            <li>Quinoa (1 cup)</li>
+            <li>Steamed broccoli (1 cup)</li>
+          </ul>
+          <p>Calories: ~800</p>
+          <p>Protein: ~50g</p>
+          <p>Total Protein: ~110g</p>
+        </div>
+
+        <!-- 3000 Calories -->
+        <div class="calorie-range" id="range-3000">
+          <h3>3000 Calories</h3>
+          <h4>Breakfast: Smoothie Bowl</h4>
+          <p>Ingredients:</p>
+          <ul>
+            <li>Banana (1)</li>
+            <li>Spinach (1 cup)</li>
+            <li>Almond milk (1 cup)</li>
+            <li>Protein powder (1 scoop)</li>
+          </ul>
+          <p>Calories: ~600</p>
+          <p>Protein: ~30g</p>
+
+          <h4>Lunch: Chicken Burrito Bowl</h4>
+          <p>Ingredients:</p>
+          <ul>
+            <li>Grilled chicken (6 oz)</li>
+            <li>Brown rice (1 cup)</li>
+            <li>Black beans (1/2 cup)</li>
+            <li>Salsa (1/4 cup)</li>
+          </ul>
+          <p>Calories: ~1000</p>
+          <p>Protein: ~60g</p>
+
+          <h4>Dinner: Beef Stir Fry with Noodles</h4>
+          <p>Ingredients:</p>
+          <ul>
+            <li>Beef strips (8 oz)</li>
+            <li>Stir fry vegetables (2 cups)</li>
+            <li>Rice noodles (1 cup)</li>
+          </ul>
+          <p>Calories: ~1400</p>
+          <p>Protein: ~80g</p>
+          <p>Total Protein: ~170g</p>
+        </div>
+
+        <!-- 4000 Calories -->
+        <div class="calorie-range" id="range-4000">
+          <h3>4000 Calories</h3>
+          <h4>Breakfast: Pancakes with Maple Syrup and Bacon</h4>
+          <p>Ingredients:</p>
+          <ul>
+            <li>Pancakes (3 large)</li>
+            <li>Maple syrup (1/4 cup)</li>
+            <li>Bacon (4 slices)</li>
+          </ul>
+          <p>Calories: ~1,000</p>
+          <p>Protein: ~25g</p>
+
+          <h4>Lunch: Double Cheeseburger with Fries</h4>
+          <p>Ingredients:</p>
+          <ul>
+            <li>Beef patties (2, 4 oz each)</li>
+            <li>Cheese (2 slices)</li>
+            <li>Bun (1)</li>
+            <li>French fries (1 serving)</li>
+          </ul>
+          <p>Calories: ~1,500</p>
+          <p>Protein: ~60g</p>
+
+          <h4>Dinner: Steak with Mashed Potatoes and Vegetables</h4>
+          <p>Ingredients:</p>
+          <ul>
+            <li>Ribeye steak (10 oz)</li>
+            <li>Mashed potatoes (1 cup)</li>
+            <li>Butter (2 tbsp)</li>
+            <li>Grilled vegetables (1 cup)</li>
+          </ul>
+          <p>Calories: ~1,500</p>
+          <p>Protein: ~80g</p>
+          <p>Total Protein: ~165g</p>
+        </div>
+
+        <!-- 5000 Calories -->
+        <div class="calorie-range" id="range-5000">
+          <h3>5000 Calories</h3>
+          <h4>Breakfast: Full English Breakfast</h4>
+          <p>Ingredients:</p>
+          <ul>
+            <li>Eggs (2)</li>
+            <li>Bacon (4 slices)</li>
+            <li>Sausage (2)</li>
+            <li>Baked beans (1/2 cup)</li>
+            <li>Grilled tomatoes (1)</li>
+            <li>Toast (2 slices)</li>
+          </ul>
+          <p>Calories: ~1,200</p>
+          <p>Protein: ~50g</p>
+
+          <h4>Lunch: Large Pizza with Pepperoni</h4>
+          <p>Ingredients:</p>
+          <ul>
+            <li>Large pizza (8 slices)</li>
+            <li>Pepperoni</li>
+          </ul>
+          <p>Calories: ~2,000</p>
+          <p>Protein: ~100g</p>
+
+          <h4>Dinner: BBQ Ribs with Mac and Cheese</h4>
+          <p>Ingredients:</p>
+          <ul>
+            <li>BBQ ribs (1 rack)</li>
+            <li>Macaroni and cheese (2 cups)</li>
+            <li>Coleslaw (1 cup)</li>
+          </ul>
+          <p>Calories: ~1,800</p>
+          <p>Protein: ~120g</p>
+          <p>Total Protein: ~270g</p>
+        </div>
+
+        <!-- 6000 Calories -->
+        <div class="calorie-range" id="range-6000">
+          <h3>6000 Calories</h3>
+          <h4>Breakfast: Breakfast Burrito with Hash Browns</h4>
+          <p>Ingredients:</p>
+          <ul>
+            <li>Large burrito (eggs, cheese, sausage, potatoes)</li>
+            <li>Hash browns (1 cup)</li>
+          </ul>
+          <p>Calories: ~1,500</p>
+          <p>Protein: ~50g</p>
+
+          <h4>Lunch: Fried Chicken with Biscuits and Gravy</h4>
+          <p>Ingredients:</p>
+          <ul>
+            <li>Fried chicken (4 pieces)</li>
+            <li>Biscuits (2)</li>
+            <li>Gravy (1/2 cup)</li>
+          </ul>
+          <p>Calories: ~2,000</p>
+          <p>Protein: ~80g</p>
+
+          <h4>Dinner: Surf and Turf with Loaded Baked Potato</h4>
+          <p>Ingredients:</p>
+          <ul>
+            <li>Steak (12 oz)</li>
+            <li>Lobster tail (1)</li>
+            <li>Loaded baked potato (butter, cheese, bacon)</li>
+          </ul>
+          <p>Calories: ~2,500</p>
+          <p>Protein: ~150g</p>
+          <p>Total Protein: ~280g</p>
+        </div>
+
+        <!-- 7000 Calories -->
+        <div class="calorie-range" id="range-7000">
+          <h3>7000 Calories</h3>
+          <h4>Breakfast: Stack of Pancakes with Butter and Syrup</h4>
+          <p>Ingredients:</p>
+          <ul>
+            <li>Pancakes (5 large)</li>
+            <li>Butter (4 tbsp)</li>
+            <li>Syrup (1/2 cup)</li>
+          </ul>
+          <p>Calories: ~1,500</p>
+          <p>Protein: ~30g</p>
+
+          <h4>Lunch: Double Bacon Cheeseburger with Onion Rings</h4>
+          <p>Ingredients:</p>
+          <ul>
+            <li>Double bacon cheeseburger</li>
+            <li>Onion rings (1 serving)</li>
+          </ul>
+          <p>Calories: ~2,500</p>
+          <p>Protein: ~80g</p>
+
+          <h4>Dinner: Large Pasta Alfredo with Chicken and Garlic Bread</h4>
+          <p>Ingredients:</p>
+          <ul>
+            <li>Pasta Alfredo (3 cups)</li>
+            <li>Grilled chicken (8 oz)</li>
+            <li>Garlic bread (4 slices)</li>
+          </ul>
+          <p>Calories: ~3,000</p>
+          <p>Protein: ~150g</p>
+          <p>Total Protein: ~260g</p>
+        </div>
+      </div>
+
+      <div class="workout-button">
+        <button type="button" aria-label="Workout Plan">
+          Workout Plan <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
     </div>
   </div>
-</div>
+
+  <script>
+    function showMealPlan() {
+      const calorieLossInput = parseInt(document.getElementById('calorie-loss-input').value);
+      const calorieLossResult = document.getElementById('calorie-loss-result');
+      const ranges = {
+        1000: document.getElementById('range-1000'),
+        2000: document.getElementById('range-2000'),
+        3000: document.getElementById('range-3000'),
+        4000: document.getElementById('range-4000'),
+        5000: document.getElementById('range-5000'),
+        6000: document.getElementById('range-6000'),
+        7000: document.getElementById('range-7000')
+      };
+
+      // Hide all ranges initially
+      for (let key in ranges) {
+        ranges[key].style.display = 'none';
+      }
+
+      if (calorieLossInput >= 1000 && calorieLossInput < 2000) {
+        ranges[1000].style.display = 'block';
+        calorieLossResult.textContent = 'Showing meal plan for 1000 calories.';
+      } else if (calorieLossInput >= 2000 && calorieLossInput < 3000) {
+        ranges[2000].style.display = 'block';
+        calorieLossResult.textContent = 'Showing meal plan for 2000 calories.';
+      } else if (calorieLossInput >= 3000 && calorieLossInput < 4000) {
+        ranges[3000].style.display = 'block';
+        calorieLossResult.textContent = 'Showing meal plan for 3000 calories.';
+      } else if (calorieLossInput >= 4000 && calorieLossInput < 5000) {
+        ranges[4000].style.display = 'block';
+        calorieLossResult.textContent = 'Showing meal plan for 4000 calories.';
+      } else if (calorieLossInput >= 5000 && calorieLossInput < 6000) {
+        ranges[5000].style.display = 'block';
+        calorieLossResult.textContent = 'Showing meal plan for 5000 calories.';
+      } else if (calorieLossInput >= 6000 && calorieLossInput < 7000) {
+        ranges[6000].style.display = 'block';
+        calorieLossResult.textContent = 'Showing meal plan for 6000 calories.';
+      } else if (calorieLossInput >= 7000) {
+        ranges[7000].style.display = 'block';
+        calorieLossResult.textContent = 'Showing meal plan for 7000 calories.';
+      } else {
+        calorieLossResult.textContent = 'Please enter a valid calorie loss within the range.';
+      }
+    }
+  </script>
+</body>
+</html>
