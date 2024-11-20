@@ -1,0 +1,109 @@
+/* Base styles */
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: #f0f5ff;
+    margin: 0;
+    padding: 2rem;
+    color: #1a365d;
+}
+
+/* Container styles */
+.workout-plan-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* Header styles */
+h2 {
+    background: linear-gradient(135deg, #2563eb, #1e40af);
+    color: white;
+    margin: 0;
+    padding: 1.5rem 2rem;
+    font-size: 1.75rem;
+    font-weight: 600;
+}
+
+/* Table styles */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+    background-color: white;
+}
+
+.table thead {
+    background-color: #e0e7ff;
+}
+
+.table th {
+    text-align: left;
+    padding: 1rem;
+    font-weight: 600;
+    color: #1e40af;
+    border-bottom: 2px solid #2563eb;
+}
+
+.table td {
+    padding: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+    line-height: 1.5;
+}
+
+/* Table row styles */
+.table tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+.table tbody tr:hover {
+    background-color: #f8fafc;
+}
+
+/* Table cell specific styles */
+.table tbody tr td:first-child {
+    font-weight: 600;
+    color: #2563eb;
+}
+
+.table tbody tr td:nth-child(2) {
+    color: #1e40af;
+    font-weight: 500;
+}
+
+.table tbody tr td:nth-child(3) {
+    color: #4b5563;
+    font-weight: 500;
+}
+
+/* Muscle group specific colors */
+.table tbody tr[data-muscle-group="Chest"] td:nth-child(3) {
+    color: #2563eb;
+}
+
+.table tbody tr[data-muscle-group="Triceps"] td:nth-child(3) {
+    color: #3b82f6;
+}
+
+.table tbody tr[data-muscle-group="Back"] td:nth-child(3) {
+    color: #1d4ed8;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
+
+    .table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    .table th,
+    .table td {
+        padding: 0.75rem;
+    }
+}

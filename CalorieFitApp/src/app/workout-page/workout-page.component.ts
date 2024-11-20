@@ -7,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class WorkoutPageComponent implements OnInit {
   // @Input() weeklyAvailability: string;
-  weeklyAvailability: string = "six";
+  weeklyAvailability: string = "three";
   workoutPlan: any[] = [];
 
   ngOnInit(): void {

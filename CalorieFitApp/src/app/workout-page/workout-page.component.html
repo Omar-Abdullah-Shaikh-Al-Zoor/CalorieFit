@@ -1,22 +1,22 @@
-<div class="workout-plan-container">
-    <h2>Your Recommended Workout Plan</h2>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Day</th>
-          <th>Workout</th>
-          <th>Muscle Group</th>
-          <th>Instructions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let workout of workoutPlan">
-          <td>{{ workout.day || 'All-in-One Day' }}</td>
-          <td>{{ workout.workout }}</td>
-          <td>{{ workout.muscleGroup }}</td>
-          <td>{{ workout.instructions }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  
+
+    <div class="workout-plan-container">
+        <h2>Your Recommended Workout Plan</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Day</th>
+                    <th>Workout</th>
+                    <th>Muscle Group</th>
+                    <th>Instructions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let workout of workoutPlan">
+                    <td>{{ workout.day || 'All-in-One Day' }}</td>
+                    <td>{{ workout.workout }}</td>
+                    <td>{{ workout.muscleGroup }}</td>
+                    <td>{{ workout.instructions }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
