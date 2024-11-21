@@ -1,338 +1,237 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calorie Fit</title>
-  <style>
-    .calorie-range {
-      display: none; /* Hide all calorie ranges by default */
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <div class="diet-plan">
-      <header>
-        <h1>Calorie Fit</h1>
-        <p>Eat right, be bright!</p>
-      </header>
+<div class="meal-plan-container">
+  <!-- Input Section -->
+  <div class="input-section">
+    <div class="input-group">
+      <label for="weight">Enter your weight (kg):</label>
+      <input type="number" id="weight" [(ngModel)]="weight" />
+    </div>
+    
+    <div class="input-group">
+      <label for="class">Select your class:</label>
+      <select id="class" [(ngModel)]="selectedClass">
+        <option value="Bulking">Bulking</option>
+        <option value="Cutting">Cutting</option>
+        <option value="Maintenance">Maintenance</option>
+      </select>
+    </div>
 
-      <div class="user-info">
-        <div class="calorie-loss">
-          <h2>Calorie Loss</h2>
-          <p>Track your daily calorie loss here.</p>
-          <input type="number" placeholder="Enter calories to lose" id="calorie-loss-input">
-          <button type="button" onclick="showMealPlan()">Track</button>
-          <p id="calorie-loss-result"></p>
-        </div>
-      </div>
+    <div class="input-group">
+      <label for="calorieLoss">Enter your daily calorie target:</label>
+      <input type="number" id="calorieLoss" [(ngModel)]="calorieLossInput">
+    </div>
 
-      <div class="workout-plan">
-        <h2>Workout Plan</h2>
-        
-        <!-- 1000 Calories -->
-        <div class="calorie-range" id="range-1000">
-          <h3>1000 Calories</h3>
-          <h4>Breakfast: Oatmeal with Berries</h4>
-          <p>Ingredients:</p>
-          <ul>
-            <li>Oatmeal (1 cup)</li>
-            <li>Mixed berries (1/2 cup)</li>
-            <li>Honey (1 tbsp)</li>
-          </ul>
-          <p>Calories: ~300</p>
-          <p>Protein: ~10g</p>
+    <button (click)="showMealPlan()">Show Meal Plan</button>
+  </div>
 
-          <h4>Lunch: Grilled Chicken Salad</h4>
-          <p>Ingredients:</p>
-          <ul>
-            <li>Grilled chicken breast (4 oz)</li>
-            <li>Mixed greens (2 cups)</li>
-            <li>Olive oil dressing (2 tbsp)</li>
-          </ul>
-          <p>Calories: ~400</p>
-          <p>Protein: ~30g</p>
+  <p class="result">{{ calorieLossResult }}</p>
 
-          <h4>Dinner: Vegetable Stir Fry</h4>
-          <p>Ingredients:</p>
-          <ul>
-            <li>Mixed vegetables (2 cups)</li>
-            <li>Tofu (4 oz)</li>
-            <li>Soy sauce (2 tbsp)</li>
-          </ul>
-          <p>Calories: ~300</p>
-          <p>Protein: ~20g</p>
-          <p>Total Protein: ~60g</p>
-        </div>
+  <!-- 1000 Calories -->
+  <div class="meal-plan" *ngIf="selectedRange === 1000">
+    <h2>1000 Calorie Meal Plan</h2>
+    
+    <h3>Breakfast (250 calories)</h3>
+    <ul>
+      <li>1/2 cup oatmeal</li>
+      <li>1 small banana</li>
+      <li>2 egg whites</li>
+    </ul>
 
-        <!-- 2000 Calories -->
-        <div class="calorie-range" id="range-2000">
-          <h3>2000 Calories</h3>
-          <h4>Breakfast: Avocado Toast with Eggs</h4>
-          <p>Ingredients:</p>
-          <ul>
-            <li>Whole grain bread (2 slices)</li>
-            <li>Avocado (1/2)</li>
-            <li>Eggs (2)</li>
-          </ul>
-          <p>Calories: ~500</p>
-          <p>Protein: ~20g</p>
+    <h3>Lunch (350 calories)</h3>
+    <ul>
+      <li>4 oz grilled chicken breast</li>
+      <li>2 cups mixed greens</li>
+      <li>1 tbsp light dressing</li>
+      <li>1/2 cup cherry tomatoes</li>
+    </ul>
 
-          <h4>Lunch: Turkey Sandwich with Soup</h4>
-          <p>Ingredients:</p>
-          <ul>
-            <li>Turkey breast (4 oz)</li>
-            <li>Whole grain bread (2 slices)</li>
-            <li>Vegetable soup (1 cup)</li>
-          </ul>
-          <p>Calories: ~700</p>
-          <p>Protein: ~40g</p>
+    <h3>Dinner (400 calories)</h3>
+    <ul>
+      <li>4 oz fish fillet</li>
+      <li>1 cup steamed vegetables</li>
+      <li>1/2 cup brown rice</li>
+    </ul>
+  </div>
 
-          <h4>Dinner: Grilled Salmon with Quinoa</h4>
-          <p>Ingredients:</p>
-          <ul>
-            <li>Salmon fillet (6 oz)</li>
-            <li>Quinoa (1 cup)</li>
-            <li>Steamed broccoli (1 cup)</li>
-          </ul>
-          <p>Calories: ~800</p>
-          <p>Protein: ~50g</p>
-          <p>Total Protein: ~110g</p>
-        </div>
+  <!-- 2000 Calories -->
+  <div class="meal-plan" *ngIf="selectedRange === 2000">
+    <h2>2000 Calorie Meal Plan</h2>
+    
+    <h3>Breakfast (500 calories)</h3>
+    <ul>
+      <li>1 cup oatmeal</li>
+      <li>1 medium banana</li>
+      <li>2 whole eggs</li>
+      <li>1 cup Greek yogurt</li>
+    </ul>
 
-        <!-- 3000 Calories -->
-        <div class="calorie-range" id="range-3000">
-          <h3>3000 Calories</h3>
-          <h4>Breakfast: Smoothie Bowl</h4>
-          <p>Ingredients:</p>
-          <ul>
-            <li>Banana (1)</li>
-            <li>Spinach (1 cup)</li>
-            <li>Almond milk (1 cup)</li>
-            <li>Protein powder (1 scoop)</li>
-          </ul>
-          <p>Calories: ~600</p>
-          <p>Protein: ~30g</p>
+    <h3>Lunch (700 calories)</h3>
+    <ul>
+      <li>6 oz grilled chicken breast</li>
+      <li>1 cup brown rice</li>
+      <li>1.5 cups mixed vegetables</li>
+      <li>1 tbsp olive oil</li>
+    </ul>
 
-          <h4>Lunch: Chicken Burrito Bowl</h4>
-          <p>Ingredients:</p>
-          <ul>
-            <li>Grilled chicken (6 oz)</li>
-            <li>Brown rice (1 cup)</li>
-            <li>Black beans (1/2 cup)</li>
-            <li>Salsa (1/4 cup)</li>
-          </ul>
-          <p>Calories: ~1000</p>
-          <p>Protein: ~60g</p>
+    <h3>Dinner (800 calories)</h3>
+    <ul>
+      <li>6 oz lean beef</li>
+      <li>1 medium sweet potato</li>
+      <li>2 cups broccoli</li>
+      <li>1/2 cup quinoa</li>
+    </ul>
+  </div>
 
-          <h4>Dinner: Beef Stir Fry with Noodles</h4>
-          <p>Ingredients:</p>
-          <ul>
-            <li>Beef strips (8 oz)</li>
-            <li>Stir fry vegetables (2 cups)</li>
-            <li>Rice noodles (1 cup)</li>
-          </ul>
-          <p>Calories: ~1400</p>
-          <p>Protein: ~80g</p>
-          <p>Total Protein: ~170g</p>
-        </div>
+  <!-- 3000 Calories -->
+  <div class="meal-plan" *ngIf="selectedRange === 3000">
+    <h2>3000 Calorie Meal Plan</h2>
+    
+    <h3>Breakfast (750 calories)</h3>
+    <ul>
+      <li>2 cups oatmeal</li>
+      <li>2 whole eggs</li>
+      <li>2 egg whites</li>
+      <li>1 large banana</li>
+      <li>2 tbsp peanut butter</li>
+      <li>1 cup Greek yogurt</li>
+    </ul>
 
-        <!-- 4000 Calories -->
-        <div class="calorie-range" id="range-4000">
-          <h3>4000 Calories</h3>
-          <h4>Breakfast: Pancakes with Maple Syrup and Bacon</h4>
-          <p>Ingredients:</p>
-          <ul>
-            <li>Pancakes (3 large)</li>
-            <li>Maple syrup (1/4 cup)</li>
-            <li>Bacon (4 slices)</li>
-          </ul>
-          <p>Calories: ~1,000</p>
-          <p>Protein: ~25g</p>
+    <h3>Lunch (1000 calories)</h3>
+    <ul>
+      <li>8 oz grilled chicken breast</li>
+      <li>2 cups brown rice</li>
+      <li>2 cups mixed vegetables</li>
+      <li>1 avocado</li>
+      <li>2 tbsp olive oil</li>
+    </ul>
 
-          <h4>Lunch: Double Cheeseburger with Fries</h4>
-          <p>Ingredients:</p>
-          <ul>
-            <li>Beef patties (2, 4 oz each)</li>
-            <li>Cheese (2 slices)</li>
-            <li>Bun (1)</li>
-            <li>French fries (1 serving)</li>
-          </ul>
-          <p>Calories: ~1,500</p>
-          <p>Protein: ~60g</p>
+    <h3>Dinner (1250 calories)</h3>
+    <ul>
+      <li>8 oz salmon fillet</li>
+      <li>2 cups quinoa</li>
+      <li>2 cups sweet potato</li>
+      <li>2 cups broccoli</li>
+      <li>2 tbsp almonds</li>
+    </ul>
+  </div>
 
-          <h4>Dinner: Steak with Mashed Potatoes and Vegetables</h4>
-          <p>Ingredients:</p>
-          <ul>
-            <li>Ribeye steak (10 oz)</li>
-            <li>Mashed potatoes (1 cup)</li>
-            <li>Butter (2 tbsp)</li>
-            <li>Grilled vegetables (1 cup)</li>
-          </ul>
-          <p>Calories: ~1,500</p>
-          <p>Protein: ~80g</p>
-          <p>Total Protein: ~165g</p>
-        </div>
+  <!-- 4000 Calories -->
+  <div class="meal-plan" *ngIf="selectedRange === 4000">
+    <h2>4000 Calorie Meal Plan</h2>
+    
+    <h3>Breakfast (1000 calories)</h3>
+    <ul>
+      <li>2 cups oatmeal</li>
+      <li>3 whole eggs</li>
+      <li>2 slices whole grain toast</li>
+      <li>2 bananas</li>
+      <li>3 tbsp peanut butter</li>
+      <li>2 cups Greek yogurt</li>
+    </ul>
 
-        <!-- 5000 Calories -->
-        <div class="calorie-range" id="range-5000">
-          <h3>5000 Calories</h3>
-          <h4>Breakfast: Full English Breakfast</h4>
-          <p>Ingredients:</p>
-          <ul>
-            <li>Eggs (2)</li>
-            <li>Bacon (4 slices)</li>
-            <li>Sausage (2)</li>
-            <li>Baked beans (1/2 cup)</li>
-            <li>Grilled tomatoes (1)</li>
-            <li>Toast (2 slices)</li>
-          </ul>
-          <p>Calories: ~1,200</p>
-          <p>Protein: ~50g</p>
+    <h3>Lunch (1500 calories)</h3>
+    <ul>
+      <li>10 oz grilled chicken breast</li>
+      <li>3 cups brown rice</li>
+      <li>2 cups mixed vegetables</li>
+      <li>1 large avocado</li>
+      <li>3 tbsp olive oil</li>
+      <li>1 cup nuts</li>
+    </ul>
 
-          <h4>Lunch: Large Pizza with Pepperoni</h4>
-          <p>Ingredients:</p>
-          <ul>
-            <li>Large pizza (8 slices)</li>
-            <li>Pepperoni</li>
-          </ul>
-          <p>Calories: ~2,000</p>
-          <p>Protein: ~100g</p>
+    <h3>Dinner (1500 calories)</h3>
+    <ul>
+      <li>12 oz lean beef</li>
+      <li>3 cups quinoa</li>
+      <li>3 cups sweet potato</li>
+      <li>2 cups broccoli</li>
+      <li>1 cup mixed nuts</li>
+    </ul>
+  </div>
 
-          <h4>Dinner: BBQ Ribs with Mac and Cheese</h4>
-          <p>Ingredients:</p>
-          <ul>
-            <li>BBQ ribs (1 rack)</li>
-            <li>Macaroni and cheese (2 cups)</li>
-            <li>Coleslaw (1 cup)</li>
-          </ul>
-          <p>Calories: ~1,800</p>
-          <p>Protein: ~120g</p>
-          <p>Total Protein: ~270g</p>
-        </div>
+  <!-- 5000 Calories -->
+  <div class="meal-plan" *ngIf="selectedRange === 5000">
+    <h2>5000 Calorie Meal Plan</h2>
+    
+    <h3>Breakfast (1250 calories)</h3>
+    <ul>
+      <li>3 cups oatmeal</li>
+      <li>4 whole eggs</li>
+      <li>3 slices whole grain toast</li>
+      <li>2 large bananas</li>
+      <li>4 tbsp peanut butter</li>
+      <li>2 cups Greek yogurt</li>
+    </ul>
 
-        <!-- 6000 Calories -->
-        <div class="calorie-range" id="range-6000">
-          <h3>6000 Calories</h3>
-          <h4>Breakfast: Breakfast Burrito with Hash Browns</h4>
-          <p>Ingredients:</p>
-          <ul>
-            <li>Large burrito (eggs, cheese, sausage, potatoes)</li>
-            <li>Hash browns (1 cup)</li>
-          </ul>
-          <p>Calories: ~1,500</p>
-          <p>Protein: ~50g</p>
+    <h3>Lunch (1750 calories)</h3>
+    <ul>
+      <li>12 oz grilled chicken breast</li>
+      <li>4 cups brown rice</li>
+      <li>3 cups mixed vegetables</li>
+      <li>2 avocados</li>
+      <li>4 tbsp olive oil</li>
+      <li>1.5 cups mixed nuts</li>
+    </ul>
 
-          <h4>Lunch: Fried Chicken with Biscuits and Gravy</h4>
-          <p>Ingredients:</p>
-          <ul>
-            <li>Fried chicken (4 pieces)</li>
-            <li>Biscuits (2)</li>
-            <li>Gravy (1/2 cup)</li>
-          </ul>
-          <p>Calories: ~2,000</p>
-          <p>Protein: ~80g</p>
+    <h3>Dinner (2000 calories)</h3>
+    <ul>
+      <li>14 oz lean beef</li>
+      <li>4 cups quinoa</li>
+      <li>4 cups sweet potato</li>
+      <li>3 cups broccoli</li>
+      <li>2 cups mixed nuts</li>
+    </ul>
+  </div>
 
-          <h4>Dinner: Surf and Turf with Loaded Baked Potato</h4>
-          <p>Ingredients:</p>
-          <ul>
-            <li>Steak (12 oz)</li>
-            <li>Lobster tail (1)</li>
-            <li>Loaded baked potato (butter, cheese, bacon)</li>
-          </ul>
-          <p>Calories: ~2,500</p>
-          <p>Protein: ~150g</p>
-          <p>Total Protein: ~280g</p>
-        </div>
+  <!-- 6000 Calories -->
+  <div class="meal-plan" *ngIf="selectedRange === 6000">
+    <h2>6000 Calorie Meal Plan</h2>
+    
+    <h3>Breakfast (1500 calories)</h3>
+    <ul>
+      <li>4 cups oatmeal</li>
+      <li>5 whole eggs</li>
+      <li>4 slices whole grain toast</li>
+      <li>3 large bananas</li>
+      <li>5 tbsp peanut butter</li>
+      <li>3 cups Greek yogurt</li>
+    </ul>
 
-        <!-- 7000 Calories -->
-        <div class="calorie-range" id="range-7000">
-          <h3>7000 Calories</h3>
-          <h4>Breakfast: Stack of Pancakes with Butter and Syrup</h4>
-          <p>Ingredients:</p>
-          <ul>
-            <li>Pancakes (5 large)</li>
-            <li>Butter (4 tbsp)</li>
-            <li>Syrup (1/2 cup)</li>
-          </ul>
-          <p>Calories: ~1,500</p>
-          <p>Protein: ~30g</p>
+    <h3>Lunch (2250 calories)</h3>
+    <ul>
+      <li>14 oz grilled chicken breast</li>
+      <li>5 cups brown rice</li>
+      <li>4 cups mixed vegetables</li>
+      <li>2 large avocados</li>
+      <li>5 tbsp olive oil</li>
+      <li>2 cups mixed nuts</li>
+    </ul>
 
-          <h4>Lunch: Double Bacon Cheeseburger with Onion Rings</h4>
-          <p>Ingredients:</p>
-          <ul>
-            <li>Double bacon cheeseburger</li>
-            <li>Onion rings (1 serving)</li>
-          </ul>
-          <p>Calories: ~2,500</p>
-          <p>Protein: ~80g</p>
+    <h3>Dinner (2250 calories)</h3>
+    <ul>
+      <li>16 oz lean beef</li>
+      <li>5 cups quinoa</li>
+      <li>5 cups sweet potato</li>
+      <li>4 cups broccoli</li>
+      <li>2 cups mixed nuts</li>
+    </ul>
+  </div>
 
-          <h4>Dinner: Large Pasta Alfredo with Chicken and Garlic Bread</h4>
-          <p>Ingredients:</p>
-          <ul>
-            <li>Pasta Alfredo (3 cups)</li>
-            <li>Grilled chicken (8 oz)</li>
-            <li>Garlic bread (4 slices)</li>
-          </ul>
-          <p>Calories: ~3,000</p>
-          <p>Protein: ~150g</p>
-          <p>Total Protein: ~260g</p>
-        </div>
-      </div>
-
-      <div class="workout-button">
-        <button type="button" aria-label="Workout Plan">
-          Workout Plan <i class="fas fa-arrow-right"></i>
-        </button>
+  <!-- Nutrition Summary -->
+  <div class="nutrition-summary" *ngIf="selectedRange">
+    <h3>Daily Nutrition Summary</h3>
+    <div class="nutrition-details">
+      <div class="protein-info">
+        <span class="label">Total Protein:</span>
+        <span class="value">{{ calculateTotalProtein() }}g</span>
       </div>
     </div>
   </div>
 
-  <script>
-    function showMealPlan() {
-      const calorieLossInput = parseInt(document.getElementById('calorie-loss-input').value);
-      const calorieLossResult = document.getElementById('calorie-loss-result');
-      const ranges = {
-        1000: document.getElementById('range-1000'),
-        2000: document.getElementById('range-2000'),
-        3000: document.getElementById('range-3000'),
-        4000: document.getElementById('range-4000'),
-        5000: document.getElementById('range-5000'),
-        6000: document.getElementById('range-6000'),
-        7000: document.getElementById('range-7000')
-      };
-
-      // Hide all ranges initially
-      for (let key in ranges) {
-        ranges[key].style.display = 'none';
-      }
-
-      if (calorieLossInput >= 1000 && calorieLossInput < 2000) {
-        ranges[1000].style.display = 'block';
-        calorieLossResult.textContent = 'Showing meal plan for 1000 calories.';
-      } else if (calorieLossInput >= 2000 && calorieLossInput < 3000) {
-        ranges[2000].style.display = 'block';
-        calorieLossResult.textContent = 'Showing meal plan for 2000 calories.';
-      } else if (calorieLossInput >= 3000 && calorieLossInput < 4000) {
-        ranges[3000].style.display = 'block';
-        calorieLossResult.textContent = 'Showing meal plan for 3000 calories.';
-      } else if (calorieLossInput >= 4000 && calorieLossInput < 5000) {
-        ranges[4000].style.display = 'block';
-        calorieLossResult.textContent = 'Showing meal plan for 4000 calories.';
-      } else if (calorieLossInput >= 5000 && calorieLossInput < 6000) {
-        ranges[5000].style.display = 'block';
-        calorieLossResult.textContent = 'Showing meal plan for 5000 calories.';
-      } else if (calorieLossInput >= 6000 && calorieLossInput < 7000) {
-        ranges[6000].style.display = 'block';
-        calorieLossResult.textContent = 'Showing meal plan for 6000 calories.';
-      } else if (calorieLossInput >= 7000) {
-        ranges[7000].style.display = 'block';
-        calorieLossResult.textContent = 'Showing meal plan for 7000 calories.';
-      } else {
-        calorieLossResult.textContent = 'Please enter a valid calorie loss within the range.';
-      }
-    }
-  </script>
-</body>
-</html>
+  <!-- Navigation Section -->
+  <div class="navigation-section">
+    <button class="workout-btn" (click)="goToWorkoutPlan()">
+      <span class="btn-text">Go to Workout Plan</span>
+      <span class="btn-icon">→</span>
+    </button>
+  </div>
+</div>

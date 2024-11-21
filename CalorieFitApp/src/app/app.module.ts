@@ -1,22 +1,19 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
-import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
-import { AppRoutingModule } from './app-routing.module';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { DietPageComponent } from './diet-page/diet-page.component';
+
 @NgModule({
   declarations: [
     AppComponent,
-    DietPageComponent,
+    DietPageComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    FormsModule
   ],
-  providers: [
-    provideClientHydration(),
-    provideHttpClient(withFetch()) // Enable fetch for HttpClient
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
