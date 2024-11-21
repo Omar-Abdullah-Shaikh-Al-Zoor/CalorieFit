@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent {
   submitted: boolean = false;
+  first_name: string = '';
+  last_name: string = '';
   email: string = '';
   password: string = '';
   message: string = '';
@@ -20,9 +22,18 @@ export class RegisterComponent {
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', Validators.required),
     confirmPassword: new FormControl('', Validators.required),
-    dateOfBirth: new FormControl('', Validators.required),
+    // dateOfBirth: new FormControl('', Validators.required),
   });
+
   constructor(private router: Router, private dataService: DataService) {}
+
+  passwordsMismatch() {
+    const password = this.RegisterForm.get('password')?.value || '';
+    const confirmPassword = this.RegisterForm.get('confirmPassword')?.value || '';
+    if (confirmPassword != password) return true;
+    else return false;
+  }
+
   // Triggered when form is submitted
   register() {
     if (this.RegisterForm.invalid) {
@@ -30,8 +41,15 @@ export class RegisterComponent {
       this.submitted = false;
       return;
     }
+    const first_name = this.RegisterForm.get('firstName')?.value || '';
+    const last_name = this.RegisterForm.get('lastName')?.value || '';
     const email = this.RegisterForm.get('email')?.value || '';
     const password = this.RegisterForm.get('password')?.value || '';
+    const confirmPassword = this.RegisterForm.get('confirmPassword')?.value || '';
+    if (password !== confirmPassword) {
+      this.error = 'Password does not match';
+      this.showErrorDialog()
+    }
     if (
       this.isFieldInvalid('email')
       || this.isFieldInvalid('password')
@@ -45,14 +63,14 @@ export class RegisterComponent {
       this.submitted = false;
       return;
     }
-    this.dataService.register(email, password).subscribe({
+    this.dataService.register(first_name, last_name, email, password).subscribe({
       next: (response) => {
         this.submitted = true;
         this.message = response.message;
         this.navigateTo('/login');
       },
       error: (error) => {
-        console.log(error.error.error);
+        console.log(error);
         this.error = error.error.error;
 
         this.showErrorDialog();

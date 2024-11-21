@@ -67,6 +67,52 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
+app.post('/api/register', async (req, res) => {
+  const { first_name, last_name, email, password } = req.body;
+  console.log(first_name, last_name, email, password);
+  return
+  if (!first_name || !last_name || !email || !password) {
+    return res.status(400).json({ error: 'All fields are required' });
+  }
+
+  try {
+    const conn = await pool.getConnection();
+
+    // Check if the user already exists
+    const [existingUser] = await conn.query(
+      'SELECT id FROM user WHERE email = ?',
+      [email]
+    );
+
+    if (existingUser.length > 0) {
+      conn.release();
+      return res.status(409).json({ error: 'Email is already registered' });
+    }
+
+    // Hash the password for security
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Insert the new user into the database
+    const [result] = await conn.query(
+      `
+      INSERT INTO user (first_name, last_name, email, password) 
+      VALUES (?, ?, ?, ?)`,
+      [first_name, last_name, email, hashedPassword]
+    );
+
+    conn.release();
+
+    // Send success response
+    res.status(201).json({
+      message: 'User registered successfully',
+      userId: result.insertId,
+    });
+  } catch (error) {
+    console.error('Register error:', error);
+    res.status(500).json({ error: 'Failed to register the account' });
+  }
+});
+
 app.get('/api/data/users', async (req, res) => {
   try {
     const users = await getUsers(); // Wait for the promise to resolve

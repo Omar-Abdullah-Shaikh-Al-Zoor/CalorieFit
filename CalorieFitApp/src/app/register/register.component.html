@@ -61,14 +61,10 @@
               <div *ngIf="isFieldInvalid('confirmPassword')" class="invalid-feedback">
                 <small>Password is required.</small>
               </div>
+              <div *ngIf="!isFieldInvalid('confirmPassword') && passwordsMismatch()" class="invalid-feedback">
+                <small>Password is required.</small>
+              </div>
             </div>
-          </div>
-
-          <!-- Date of Birth -->
-          <div class="form-group mb-3">
-            <label class="form-label" for="dateOfBirth">Date of Birth</label>
-            <input type="date" formControlName="dateOfBirth" class="form-control"
-              [ngClass]="{'is-invalid': isFieldInvalid('dateOfBirth')}" required />
           </div>
 
           <div class="form-group">
