@@ -6,13 +6,14 @@ const bcrypt = require('bcrypt');
 
 const app = express();
 const pool = mariadb.createPool({
-  host: process.env.DB_HOST,
-  port: process.env.DB_PORT,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_DATABASE,
-  connectionLimit: 5
+  host: process.env.DB_HOST || 'localhost',
+  port: process.env.DB_PORT || 3366,
+  user: process.env.DB_USER || 'root',
+  password: process.env.DB_PASSWORD || 'root',
+  database: process.env.DB_DATABASE || 'caloriefit',
+  connectionLimit: 5,
 });
+
 
 app.use(cors());
 app.use(express.json());
@@ -62,7 +63,7 @@ app.post('/api/login', async (req, res) => {
       res.status(401).json({ error: `The Email entered is not associated with any account` });
     }
   } catch (error) {
-    console.error('Login error:', error);
+    //console.error('Login error:', error);
     res.status(500).json({ error: 'Login failed' });
   }
 });

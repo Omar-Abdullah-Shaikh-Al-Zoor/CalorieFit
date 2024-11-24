@@ -17,52 +17,41 @@ export class RegisterComponent {
   message: string = '';
   error: string = '';
   RegisterForm = new FormGroup({
-    firstName: new FormControl('', Validators.required),
-    lastName: new FormControl('', Validators.required),
+    firstName: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z ]{2,}')]),
+    lastName: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z ]{2,}')]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', Validators.required),
+    password: new FormControl('', [Validators.required, Validators.pattern('^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$')]),  // Example: Minimum 8 characters, at least one letter and one number
     confirmPassword: new FormControl('', Validators.required),
-    // dateOfBirth: new FormControl('', Validators.required),
   });
 
   constructor(private router: Router, private dataService: DataService) {}
 
-  passwordsMismatch() {
+  passwordMatchValidator() {
     const password = this.RegisterForm.get('password')?.value || '';
     const confirmPassword = this.RegisterForm.get('confirmPassword')?.value || '';
-    if (confirmPassword != password) return true;
-    else return false;
+    if (!password || !confirmPassword) return false;
+    return confirmPassword !== password;
   }
 
   // Triggered when form is submitted
   register() {
     if (this.RegisterForm.invalid) {
-      document.getElementById('password')?.classList.add('is-invalid');
       this.submitted = false;
       return;
     }
+
     const first_name = this.RegisterForm.get('firstName')?.value || '';
     const last_name = this.RegisterForm.get('lastName')?.value || '';
     const email = this.RegisterForm.get('email')?.value || '';
     const password = this.RegisterForm.get('password')?.value || '';
     const confirmPassword = this.RegisterForm.get('confirmPassword')?.value || '';
+
     if (password !== confirmPassword) {
-      this.error = 'Password does not match';
-      this.showErrorDialog()
-    }
-    if (
-      this.isFieldInvalid('email')
-      || this.isFieldInvalid('password')
-      || this.isFieldInvalid('confirmPassword')
-      || this.isFieldInvalid('firstName')
-      || this.isFieldInvalid('lastName')
-      //|| this.isFieldInvalid('dateOfBirth')
-    ){
-      console.log('Invalid field');
-      document.getElementById('email')?.classList.add('is-invalid');
-      this.submitted = false;
+      this.error = 'Passwords do not match';
+      this.showErrorDialog();
       return;
     }
+
     this.dataService.register(first_name, last_name, email, password).subscribe({
       next: (response) => {
         this.submitted = true;
@@ -70,29 +59,26 @@ export class RegisterComponent {
         this.navigateTo('/login');
       },
       error: (error) => {
-        console.log(error);
         this.error = error.error.error;
-
         this.showErrorDialog();
       }
     });
   }
-  // Helper method to check if a form field is invalid after submission
+
   isFieldInvalid(fieldName: string): boolean {
     const field = this.RegisterForm.get(fieldName);
     return field ? field.invalid && (field.touched || this.submitted) : false;
   }
+
   showErrorDialog() {
     const dialog: any = document.getElementById('errorDialog');
-    if (dialog) {
-      dialog.showModal();
-    }
+    if (dialog) dialog.showModal();
   }
+
+
   closeErrorDialog() {
     const dialog: any = document.getElementById('errorDialog');
-    if (dialog) {
-      dialog.close();
-    }
+    if (dialog) dialog.close();
     this.error = '';
   }
 
