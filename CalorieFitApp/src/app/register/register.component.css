@@ -40,7 +40,7 @@
 .register-form .form-control {
   width: 100%;
   padding: 12px;
-  border: 1px solid #ced4da;
+  /* border: 1px solid #ced4da; */
   border-radius: 5px;
   font-size: 1rem;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
@@ -86,8 +86,20 @@
   cursor: not-allowed;
   opacity: 0.7;
 }
+
+/* Custom CSS to fine-tune icon position */
+.position-absolute {
+  right: 15px;
+  top: 35px;
+}
+
+/* CSS to shift the eye icon when the password field is invalid */
+.invalid-eye {
+  right: 35px !important;  /* Moves the eye icon 20px to the left */
+}
+
 /* Styles to enhance the dialog appearance */
-#errorDialog {
+#Dialog {
   width: 100%; /* Full width of the page */
   max-width: 500px; /* Limit width for better readability */
   max-height: 300px; /* Auto height based on content */
@@ -103,7 +115,7 @@
 }
 
 /* Optional: Add a backdrop effect */
-#errorDialog::backdrop {
+#Dialog::backdrop {
   background: rgba(0, 0, 0, 0.4);
 }
 

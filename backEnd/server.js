@@ -51,7 +51,7 @@ app.post('/api/login', async (req, res) => {
     const conn = await pool.getConnection();
     const [user] = await conn.query('SELECT * FROM user WHERE email = ?', [email]);
     conn.release();
-    //
+
     if (user) {
       if (await bcrypt.compare(password, user.password)) {
         res.status(200).json({ message: 'Login successful' });
@@ -70,8 +70,7 @@ app.post('/api/login', async (req, res) => {
 
 app.post('/api/register', async (req, res) => {
   const { first_name, last_name, email, password } = req.body;
-  console.log(first_name, last_name, email, password);
-  return
+
   if (!first_name || !last_name || !email || !password) {
     return res.status(400).json({ error: 'All fields are required' });
   }
@@ -80,8 +79,8 @@ app.post('/api/register', async (req, res) => {
     const conn = await pool.getConnection();
 
     // Check if the user already exists
-    const [existingUser] = await conn.query(
-      'SELECT id FROM user WHERE email = ?',
+    const existingUser = await conn.query(
+      'SELECT user_id FROM user WHERE email = ?',
       [email]
     );
 
@@ -94,7 +93,7 @@ app.post('/api/register', async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Insert the new user into the database
-    const [result] = await conn.query(
+    const result = await conn.query(
       `
       INSERT INTO user (first_name, last_name, email, password) 
       VALUES (?, ?, ?, ?)`,
@@ -105,8 +104,7 @@ app.post('/api/register', async (req, res) => {
 
     // Send success response
     res.status(201).json({
-      message: 'User registered successfully',
-      userId: result.insertId,
+        message: 'Account Successfully Created. You will be redirected to the login page shortly.'
     });
   } catch (error) {
     console.error('Register error:', error);

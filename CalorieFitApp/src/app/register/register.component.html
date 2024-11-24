@@ -1,72 +1,101 @@
 <div>
   <div class="register-container">
-    <div class="register-box">
+    <div class="register-box w-50">
       <div>
         <h2 class="text-center text-primary">Welcome to CalorieFit</h2>
         <p class="text-center">Create your account to start tracking your fitness journey</p>
       </div>
-      <div class="register-form">
+      <div class="register-form mt-5">
         <form [formGroup]="RegisterForm" (ngSubmit)="register()" [ngClass]="{ 'was-validated': submitted }" novalidate>
           <!-- First Name -->
-          <div class="form-group mb-3">
-            <label class="form-label" for="firstName">First Name</label>
-            <input type="text" formControlName="firstName" class="form-control"
-              [ngClass]="{'is-invalid': isFieldInvalid('firstName')}"
-              placeholder="First Name" required
-            />
-            <div *ngIf="RegisterForm.get('firstName')?.hasError('pattern')" class="invalid-feedback">
-              <small>First name must be at least 2 characters long and only contain letters.</small>
+          <div class="d-flex gap-3">
+            <div class="form-group mb-3 w-50">
+              <label class="form-label" for="firstName">First Name</label>
+              <input type="text" formControlName="firstName" class="form-control"
+                [ngClass]="{'is-invalid': isFieldInvalid('firstName') || isInvalidPattern('firstName')}"
+                placeholder="First Name" required
+              />
+              <div *ngIf="isFieldInvalid('firstName')" class="invalid-feedback">
+                <small>First name is required.</small>
+              </div>
+              <div *ngIf="isInvalidPattern('firstName')" class="invalid-feedback">
+                <small>First name must be at least 2 characters long and only contain letters.</small>
+              </div>
+            </div>
+
+            <!-- Last Name -->
+            <div class="form-group mb-3 w-50">
+              <label class="form-label" for="lastName">Last Name</label>
+              <input type="text" formControlName="lastName" class="form-control"
+                [ngClass]="{'is-invalid': isFieldInvalid('lastName') || isInvalidPattern('lastName')}"
+                placeholder="Last Name" required
+              />
+              <div *ngIf="isFieldInvalid('lastName')" class="invalid-feedback reqd-field">
+                <small>Last name is required.</small>
+              </div>
+              <div *ngIf="isInvalidPattern('lastName')" class="invalid-feedback">
+                <small>Last name must be at least 2 characters long and only contain letters.</small>
+              </div>
             </div>
           </div>
-
-          <!-- Last Name -->
-          <div class="form-group mb-3">
-            <label class="form-label" for="lastName">Last Name</label>
-            <input type="text" formControlName="lastName" class="form-control"
-              [ngClass]="{'is-invalid': isFieldInvalid('lastName')}"
-              placeholder="Last Name" required
-            />
-            <div *ngIf="isFieldInvalid('lastName')" class="invalid-feedback reqd-field">
-              <small>Last name is required.</small>
-            </div>
-            <div *ngIf="RegisterForm.get('lastName')?.hasError('pattern')" class="invalid-feedback">
-              <small>Last name must be at least 2 characters long and only contain letters.</small>
-            </div>
-          </div>
-
           <!-- Email -->
           <div class="form-group mb-3">
             <label class="form-label" for="email">Email</label>
-            <input type="email" formControlName="email" class="form-control" [ngClass]="{'is-invalid': isFieldInvalid('email')}" placeholder="Email" required />
-            <div *ngIf="isFieldInvalid('email')" class="invalid-feedback">
-              <small>Email is required and must be a valid email address.</small>
-            </div>
-          </div>
-
-          <!-- Password -->
-          <div class="form-group mb-3">
-            <label class="form-label" for="password">Password</label>
-            <input type="password" formControlName="password" class="form-control"
-              [ngClass]="{'is-invalid': isFieldInvalid('password') && RegisterForm.get('password')?.hasError('pattern')}"
-              placeholder="Password" required
+            <input type="email" formControlName="email" class="form-control"
+              [ngClass]="{'is-invalid': isFieldInvalid('email') || RegisterForm.get('email')?.hasError('email')}"
+              placeholder="Email" required
             />
-            <div *ngIf="isFieldInvalid('password') && RegisterForm.get('password')?.hasError('pattern')" class="invalid-feedback">
-              <small>Password must be at least 8 characters, with at least one letter and one number.</small>
+            <div *ngIf="isFieldInvalid('email')" class="invalid-feedback">
+              <small>Email is required.</small>
+            </div>
+            <div *ngIf="RegisterForm.get('email')?.hasError('email')" class="invalid-feedback">
+              <small>Please enter a valid email address.</small>
             </div>
           </div>
-
-          <!-- Confirm Password -->
-          <div class="form-group mb-3">
-            <label class="form-label" for="confirmPassword">Confirm Password</label>
-            <input type="password" formControlName="confirmPassword" class="form-control"
-              [ngClass]="{
-                'is-invalid': isFieldInvalid('confirmPassword') || (passwordMatchValidator()) }"
-                placeholder="Confirm Password" required />
-            <div *ngIf="isFieldInvalid('confirmPassword')" class="invalid-feedback reqd-field">
-              <small>Confirm password field is required.</small>
+          <div class="d-flex gap-3 mb-3">
+            <!-- Password -->
+            <div class="form-group mb-3 w-50 position-relative">
+              <label class="form-label" for="password">Password</label>
+              <input id='password' type="password" formControlName="password" class="form-control"
+                [ngClass]="{'is-invalid': isFieldInvalid('password') || isInvalidPattern('password')}"
+                placeholder="Password" required
+              />
+              <i class="bi bi-eye position-absolute"
+                [ngClass]="{
+                  'invalid-eye': isFieldInvalid('password') || isInvalidPattern('password')
+                }"
+                id="togglepassword" style="right: 15px; top: 44px; cursor: pointer;"
+                (click)="togglePasswordVisibility('password')">
+              </i>
+              <div *ngIf="isFieldInvalid('password')" class="invalid-feedback">
+                <small>Password is required.</small>
+              </div>
+              <div *ngIf="isInvalidPattern('password')" class="invalid-feedback">
+                <small>Password must be at least 8 characters, with at least one letter and one number.</small>
+              </div>
             </div>
-            <div *ngIf="passwordMatchValidator()" class="invalid-feedback">
-              <small>Passwords do not match.</small>
+
+            <!-- Confirm Password -->
+            <div class="form-group mb-3 w-50 position-relative">
+              <label class="form-label" for="confirmPassword">Confirm Password</label>
+              <input id='confirmPassword' type="password" formControlName="confirmPassword" class="form-control"
+                [ngClass]="{
+                  'is-invalid': isFieldInvalid('ConfirmPassword') || passwordMatchValidator() }"
+                placeholder="Confirm Password" required />
+              <i class="bi bi-eye position-absolute"
+                  [ngClass]="{
+                    'invalid-eye': isFieldInvalid('ConfirmPassword') || passwordMatchValidator()
+                  }"
+                  style="right: 15px; top: 44px; cursor: pointer;"
+                  id="toggleconfirmPassword"
+                  (click)="togglePasswordVisibility('confirmPassword')">
+              </i>
+              <div *ngIf="isFieldInvalid('confirmPassword')" class="invalid-feedback reqd-field">
+                <small>Confirm password field is required.</small>
+              </div>
+              <div *ngIf="passwordMatchValidator()" class="invalid-feedback">
+                <small>Passwords do not match.</small>
+              </div>
             </div>
           </div>
 
@@ -78,16 +107,19 @@
     </div>
   </div>
 
-  <dialog id="errorDialog" class="bg-white border-0 shadow">
-    <div class="modal-header bg-danger text-white">
-      <h5 class="modal-title m-2">Register Error</h5>
-      <button type="button" class="btn-close btn-close-white m-2" (click)="closeErrorDialog()"></button>
+  <dialog id="Dialog" class="bg-white border-0 shadow">
+    <div class="modal-header bg-danger text-white"
+      [ngClass]="{'bg-danger': dialog.type == 'error',
+                'bg-success': dialog.type == 'success'}"
+    >
+      <h5 class="modal-title m-2">{{ dialog.title }}</h5>
+      <button type="button" class="btn-close btn-close-white m-2" (click)="closeDialog()"></button>
     </div>
     <div class="modal-body">
-      <p class="text-left m-3">{{ error }}</p>
+      <p class="text-left m-3">{{ dialog.message }}</p>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-secondary w-25 m-2" (click)="closeErrorDialog()">Close</button>
+      <button type="button" class="btn btn-secondary w-25 m-2" (click)="closeDialog()">Close</button>
     </div>
   </dialog>
 </div>
