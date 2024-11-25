@@ -1,81 +1,59 @@
-require('dotenv').config();
 const express = require('express');
-const mariadb = require('mariadb');
+const mysql = require('mysql2');
 const cors = require('cors');
-const bcrypt = require('bcrypt');
 
 const app = express();
-const pool = mariadb.createPool({
-  host: process.env.DB_HOST,
-  port: process.env.DB_PORT,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_DATABASE,
-  connectionLimit: 5
-});
+const port = 3000;
 
 app.use(cors());
 app.use(express.json());
-async function getUsers() {
-  try {
-    const users = await pool.query("SELECT * from user");
-    return users;
-  } catch (error) {
-    console.error('Database connection failed:', error);
-    return [];
-  }
-}
-async function addUser(user) {
-  try {
-    const hashedPassword = await bcrypt.hash(user.password, 10);
-    const conn = await pool.getConnection();
-    const result = await conn.query('INSERT INTO user (email, password) VALUES (?, ?)', [user.email, hashedPassword]);
-    conn.release();
-    console.log('User added:', result);
-    return result;
-  } catch (error) {
-    console.error('Database connection failed:', error);
-    return [];
-  }
-}
 
-// Add a new user
-// const user = { email: 'omar@gmail.com', password: '123456' };
-// addUser(user)
-
-// Login validation
-app.post('/api/login', async (req, res) => {
-  const { email, password } = req.body;
-  try {
-    const conn = await pool.getConnection();
-    const [user] = await conn.query('SELECT * FROM user WHERE email = ?', [email]);
-    conn.release();
-    //
-    if (user) {
-      if (await bcrypt.compare(password, user.password)) {
-        res.status(200).json({ message: 'Login successful' });
-      } else {
-        res.status(401).json({ error: `Incorrect Password` });
-      } 
-    }
-      else {
-      res.status(401).json({ error: `The Email entered is not associated with any account` });
-    }
-  } catch (error) {
-    console.error('Login error:', error);
-    res.status(500).json({ error: 'Login failed' });
-  }
+const db = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: 'root',
+  database: 'fitness_db'
 });
 
-app.get('/api/data/users', async (req, res) => {
-  try {
-    const users = await getUsers(); // Wait for the promise to resolve
-    res.json(users); // Send the resolved data as JSON
-  } catch (error) {
-    console.error('Error fetching users:', error);
-    res.status(500).json({ error: 'Failed to retrieve users' });
+db.connect((err) => {
+  if (err) {
+    console.error('Error connecting to the database:', err);
+    return;
   }
+  console.log('Connected to the database');
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.get('/api/workout/:frequency', (req, res) => {
+  const frequency = req.params.frequency;
+  let table;
+
+  switch (frequency) {
+    case 'once':
+      table = 'once_a_week';
+      break;
+    case 'three':
+      table = 'three_times_a_week';
+      break;
+    case 'four':
+      table = 'four_times_a_week';
+      break;
+    case 'six':
+      table = 'six_times_a_week';
+      break;
+    default:
+      return res.status(400).json({ error: 'Invalid frequency' });
+  }
+
+  const query = `SELECT * FROM ${table}`;
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error('Error executing query:', err);
+      return res.status(500).json({ error: 'Internal server error' });
+    }
+    res.json(results);
+  });
+});
+
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
