@@ -14,4 +14,10 @@ export class DataService {
   login(email: string, password: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/login`, { email, password });
   }
+  reset_password_email(email: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/reset-password-email`, { email });
+  }
+  validate_email(email: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/validate-email`, { email });
+  }
 }

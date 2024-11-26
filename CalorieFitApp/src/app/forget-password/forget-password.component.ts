@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from '../data.service';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-forget-password',
@@ -10,15 +11,15 @@ import { DataService } from '../data.service';
 })
 export class ForgetPasswordComponent {
   submitted: boolean = false;
+  invalidEmail: boolean | null = null;
+  dialog: { title: string, message: string, type: string } | null = null;
   email: string = '';
-  message: string = '';
-  error: string = '';
   ForgetPasswordForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
   });
   constructor(private router: Router, private dataService: DataService) {}
   // Triggered when form is submitted
-  forgetPassword() {
+  async forgetPassword() {
     if (this.ForgetPasswordForm.invalid) {
       for (const key in this.ForgetPasswordForm.controls) {
         if (this.ForgetPasswordForm.get(key)?.invalid) {
@@ -26,45 +27,65 @@ export class ForgetPasswordComponent {
         }
       }
       this.submitted = false;
+      this.invalidEmail = null;
       return;
     }
     const email = this.ForgetPasswordForm.get('email')?.value || '';
-    const password = this.ForgetPasswordForm.get('password')?.value || '';
-    if (this.isFieldInvalid('email') || this.isFieldInvalid('password')) {
+    if (this.isInvalidField()) {
       this.submitted = false;
+      this.invalidEmail = null;
       return;
     }
-    this.dataService.login(email, password).subscribe({
+    const validEmail = await this.validateEmail(email);
+
+    if (!validEmail) {
+      this.submitted = false;
+      this.invalidEmail = true;
+      return;
+    }
+
+    this.invalidEmail = false;
+    this.dataService.reset_password_email(email).subscribe({
       next: (response) => {
+        this.dialog = { title: 'Success', message: response.message, type: 'success' };
         this.submitted = true;
-        this.message = response.message;
-        this.navigateTo('/home');
+        this.showDialog();
       },
       error: (error) => {
-        console.log(error.error.error);
-        this.error = error.error.error;
-
-        this.showErrorDialog();
+        this.dialog = { title: 'Error', message: error.error.error, type: 'error' };
+        this.showDialog();
       }
     });
   }
-  // Helper method to check if a form field is invalid after submission
-  isFieldInvalid(fieldName: string): boolean {
-    const field = this.ForgetPasswordForm.get(fieldName);
+  isInvalidField(): boolean {
+    const field = this.ForgetPasswordForm.get('email');
     return field ? field.invalid && (field.touched || this.submitted) : false;
   }
-  showErrorDialog() {
-    const dialog: any = document.getElementById('errorDialog');
+  validateEmail(email: string): Promise<boolean> {
+    return firstValueFrom(this.dataService.validate_email(email)).then(
+      (response) => {
+        console.log('Response:', response);
+        return response === true;
+      },
+      (error) => {
+        console.error('Error:', error);
+        return false;
+      }
+    );
+  }
+
+  showDialog() {
+    const dialog: any = document.getElementById('Dialog');
     if (dialog) {
       dialog.showModal();
     }
   }
-  closeErrorDialog() {
-    const dialog: any = document.getElementById('errorDialog');
+  closeDialog() {
+    const dialog: any = document.getElementById('Dialog');
     if (dialog) {
       dialog.close();
     }
-    this.error = '';
+    this.dialog = { title: '', message: '', type: '' };
   }
 
   navigateTo(path: string) {
