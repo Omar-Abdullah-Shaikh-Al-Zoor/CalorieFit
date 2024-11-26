@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DataService } from '../data.service';
 import { Router } from '@angular/router';
+import { UsersService } from '../users.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,7 @@ export class LoginComponent {
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', Validators.required),
   });
-  constructor(private router: Router, private dataService: DataService) {}
+  constructor(private router: Router, private dataService: DataService, private userService: UsersService) {}
   // Triggered when form is submitted
   login() {
     if (this.LoginForm.invalid) {
@@ -40,6 +41,14 @@ export class LoginComponent {
       next: (response) => {
         this.submitted = true;
         this.message = response.message;
+        this.userService.setUserDetails(
+          response.user.user_id,
+          response.user.email,
+          response.user.first_name,
+          response.user.last_name,
+          response.user.is_admin
+        );
+        console.log('User Details:', this.userService.getUserDetails());
         this.navigateTo('/home');
       },
       error: (error) => {
