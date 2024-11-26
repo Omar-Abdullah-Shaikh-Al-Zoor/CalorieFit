@@ -16,28 +16,6 @@ const pool = mariadb.createPool({
 
 app.use(cors());
 app.use(express.json());
-async function getUsers() {
-  try {
-    const users = await pool.query("SELECT * from user");
-    return users;
-  } catch (error) {
-    console.error('Database connection failed:', error);
-    return [];
-  }
-}
-async function addUser(user) {
-  try {
-    const hashedPassword = await bcrypt.hash(user.password, 10);
-    const conn = await pool.getConnection();
-    const result = await conn.query('INSERT INTO user (email, password) VALUES (?, ?)', [user.email, hashedPassword]);
-    conn.release();
-    console.log('User added:', result);
-    return result;
-  } catch (error) {
-    //console.error('Database connection failed:', error);
-    return [];
-  }
-}
 
 // Add a new user
 // const user = { email: 'omar@gmail.com', password: '123456' };

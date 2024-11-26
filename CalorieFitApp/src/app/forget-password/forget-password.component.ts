@@ -61,17 +61,14 @@ export class ForgetPasswordComponent {
     const field = this.ForgetPasswordForm.get('email');
     return field ? field.invalid && (field.touched || this.submitted) : false;
   }
-  validateEmail(email: string): Promise<boolean> {
-    return firstValueFrom(this.dataService.validate_email(email)).then(
-      (response) => {
-        console.log('Response:', response);
-        return response === true;
-      },
-      (error) => {
-        console.error('Error:', error);
-        return false;
-      }
-    );
+  async validateEmail(email: string): Promise<boolean> {
+    try {
+      const response = await firstValueFrom(this.dataService.validate_email(email));
+      return response === true;
+    } catch (error) {
+      //console.error('Error:', error);
+      return false;
+    }
   }
 
   showDialog() {
