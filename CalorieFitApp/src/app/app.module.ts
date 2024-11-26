@@ -9,6 +9,7 @@ import { InitiationPageComponent } from './initiation-page/initiation-page.compo
 import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 import { provideHttpClient, withFetch } from '@angular/common/http';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
     LoginComponent,
     DietPageComponent,
     InitiationPageComponent,
-    RegisterComponent
+    RegisterComponent,
+    ForgetPasswordComponent
   ],
   imports: [
     BrowserModule,

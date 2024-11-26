@@ -5,6 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { AppComponent } from './app.component';
 import { DietPageComponent } from './diet-page/diet-page.component';
 import { RegisterComponent } from './register/register.component';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'setup', component: InitiationPageComponent },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'home', component: AppComponent},
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'forget-password', component: ForgetPasswordComponent}
 ];
 
 @NgModule({
