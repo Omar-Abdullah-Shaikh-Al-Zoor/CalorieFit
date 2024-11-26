@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { VitalStatusService } from '../vital-status.service';
 
 @Component({
   selector: 'app-initiation-page',
@@ -20,7 +21,7 @@ export class InitiationPageComponent {
   dailyProteinIntake: number = 0;
   dailyCarbIntake: number = 0;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private vitalStatusService: VitalStatusService) {}
 
   // Function to handle selection of fitness goal
   selectGoal(goal: string): void {
@@ -64,6 +65,8 @@ export class InitiationPageComponent {
 
       this.dailyProteinIntake = this.weight; // 1 gram per kg of weight
       this.dailyCarbIntake = Math.round((this.dailyCaloricExpenditure / 2) * 0.25); // Half the daily caloric expenditure multiplied by 0.25
+
+      this.vitalStatusService.setVitalStatus(this.fitnessGoal, this.gender, this.height, this.weight, this.age, this.dailyCaloricExpenditure, this.dailyProteinIntake, this.dailyCarbIntake);
       this.navigateTo('/createDietPlan');
     }
   }

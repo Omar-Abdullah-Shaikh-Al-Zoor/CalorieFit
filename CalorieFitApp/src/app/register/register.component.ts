@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DataService } from '../data.service';
 import { Router } from '@angular/router';
+import { VitalStatusService } from '../vital-status.service';
 
 @Component({
   selector: 'app-register',
@@ -9,6 +10,14 @@ import { Router } from '@angular/router';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
+  vitals: {
+    fitnessGoal: string, gender: string,
+    height: number, weight: number, age: number,
+    dailyCaloricExpenditure: number,
+    dailyProteinIntake : number,
+    dailyCarbIntake : number
+  } | null = null;
+
   submitted: boolean = false;
   first_name: string = '';
   last_name: string = '';
@@ -24,8 +33,13 @@ export class RegisterComponent {
     confirmPassword: new FormControl('', Validators.required),
   });
 
-  constructor(private router: Router, private dataService: DataService) {}
+  constructor(private router: Router,
+    private dataService: DataService,
+    private vitalStatusService: VitalStatusService) {}
 
+  ngOnInit(): void {
+    this.vitals = this.vitalStatusService.getVitalStatus();
+  }
   passwordMatchValidator() {
     const password = this.RegisterForm.get('password')?.value || '';
     const confirmPassword = this.RegisterForm.get('confirmPassword')?.value || '';
@@ -79,7 +93,9 @@ export class RegisterComponent {
       }
     });
   }
-
+  skipRegister() {
+    this.navigateTo('/home');
+  }
   togglePasswordVisibility(field: string): void {
     const confirmField = document.getElementById(field) as HTMLInputElement;
     const eyeIcon = document.getElementById(`toggle${field}`) as HTMLElement;
