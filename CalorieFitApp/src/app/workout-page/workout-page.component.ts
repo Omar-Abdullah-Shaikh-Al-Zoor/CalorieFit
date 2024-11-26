@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WorkoutService } from '../workout.service';
 import { Workout } from '../workout';
+import { Router } from '@angular/router'; // Import Router
 
 @Component({
   selector: 'app-workout-page',
@@ -9,9 +10,10 @@ import { Workout } from '../workout';
 })
 export class WorkoutPageComponent implements OnInit {
   workouts: Workout[] = [];
-  frequency: string = 'six';
+  frequency: string = 'three';
 
-  constructor(private workoutService: WorkoutService) { }
+  // Inject Router into the constructor
+  constructor(private workoutService: WorkoutService, private router: Router) { }
 
   ngOnInit(): void {
     this.getWorkoutPlan();
@@ -30,5 +32,10 @@ export class WorkoutPageComponent implements OnInit {
 
   onFrequencyChange(): void {
     this.getWorkoutPlan();
+  }
+
+  // Add navigateToRegistration function
+  navigateToRegistration(): void {
+    this.router.navigate(['/register']); // Ensure 'registration' is a valid route in your app
   }
 }

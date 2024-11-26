@@ -1,19 +1,22 @@
-<h2>Your Workout Plan</h2>
+<div class="header">
+  <button class="registration-button">Register</button>
+</div>
 
+<h2>Your Workout Plan</h2>
 
 <table>
   <thead>
-    <tr>
-      <th>Workout Name</th>
-      <th>Muscle Group</th>
-      <th>Instructions</th>
-    </tr>
+      <tr>
+          <th>Workout Name</th>
+          <th>Muscle Group</th>
+          <th>Instructions</th>
+      </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let workout of workouts">
-      <td>{{ workout.workout_name }}</td>
-      <td>{{ workout.muscle_group }}</td>
-      <td>{{ workout.instructions }}</td>
-    </tr>
+      <tr *ngFor="let workout of workouts">
+          <td>{{ workout.workout_name }}</td>
+          <td>{{ workout.muscle_group }}</td>
+          <td>{{ workout.instructions }}</td>
+      </tr>
   </tbody>
 </table>
