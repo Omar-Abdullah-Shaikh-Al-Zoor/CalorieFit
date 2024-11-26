@@ -158,3 +158,35 @@ li::before {
   font-size: 20px;
   margin-left: 5px;
 }
+/* Protein and Carbohydrate Info Styling - Positioned at the Top */
+.protein-info,
+.carbohydrate-info {
+  font-size: 1.2em; /* Slightly larger font for emphasis */
+  margin-bottom: 20px; /* Adds spacing below the text */
+  color: #333; /* Darker color for better readability */
+  text-align: left; /* Aligns the text to the left */
+  font-weight: bold; /* Makes the text stand out */
+}
+
+
+.nutrition-summary {
+  margin-bottom: 20px; 
+  padding: 10px;
+  background-color:#16f997a0; 
+  border: 1px solid #000000; 
+  border-radius: 8px; 
+}
+
+
+@media (max-width: 768px) {
+  .protein-info,
+  .carbohydrate-info {
+    font-size: 1em; 
+    margin-bottom: 10px; 
+  }
+
+  .nutrition-summary {
+    padding: 8px; 
+  }
+}
+
