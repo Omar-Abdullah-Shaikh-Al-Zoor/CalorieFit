@@ -1,25 +1,8 @@
+<!-- meal-plan.component.html -->
 <div class="meal-plan-container">
-  <!-- Input Section -->
   <div class="input-section">
-    <div class="input-group">
-      <label for="weight">Enter your weight (kg):</label>
-      <input type="number" id="weight" [(ngModel)]="weight" />
-    </div>
-    
-    <div class="input-group">
-      <label for="class">Select your class:</label>
-      <select id="class" [(ngModel)]="selectedClass">
-        <option value="Bulking">Bulking</option>
-        <option value="Cutting">Cutting</option>
-        <option value="Maintenance">Maintenance</option>
-      </select>
-    </div>
-
-    <div class="input-group">
-      <label for="calorieLoss">Enter your daily calorie target:</label>
-      <input type="number" id="calorieLoss" [(ngModel)]="calorieLossInput">
-    </div>
-
+    <label for="calorieLoss">Enter your daily calorie target:</label>
+    <input type="number" id="calorieLoss" [(ngModel)]="calorieLossInput">
     <button (click)="showMealPlan()">Show Meal Plan</button>
   </div>
 
@@ -215,23 +198,10 @@
       <li>2 cups mixed nuts</li>
     </ul>
   </div>
-
-  <!-- Nutrition Summary -->
-  <div class="nutrition-summary" *ngIf="selectedRange">
-    <h3>Daily Nutrition Summary</h3>
-    <div class="nutrition-details">
-      <div class="protein-info">
-        <span class="label">Total Protein:</span>
-        <span class="value">{{ calculateTotalProtein() }}g</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- Navigation Section -->
-  <div class="navigation-section">
-    <button class="workout-btn" (click)="goToWorkoutPlan()">
-      <span class="btn-text">Go to Workout Plan</span>
-      <span class="btn-icon">→</span>
-    </button>
-  </div>
+</div>
+<div class="workout-button-container">
+  <button class="workout-button" routerLink="/workout-plan">
+    Work Out Plan
+    <i class="arrow-icon">→</i>
+  </button>
 </div>

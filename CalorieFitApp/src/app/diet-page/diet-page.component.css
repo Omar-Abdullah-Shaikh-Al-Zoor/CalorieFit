@@ -129,3 +129,32 @@ li::before {
     margin: 10px 0;
   }
 }
+.workout-button-container {
+  display: flex;
+  justify-content: center;
+  margin: 40px 0;
+}
+
+.workout-button {
+  background-color: #f11717;
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 25px;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+}
+
+.workout-button:hover {
+  background-color: #1bdd45;
+  transform: translateX(5px);
+}
+
+.arrow-icon {
+  font-size: 20px;
+  margin-left: 5px;
+}
