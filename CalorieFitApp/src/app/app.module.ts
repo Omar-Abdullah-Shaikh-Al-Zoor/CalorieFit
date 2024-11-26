@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { WorkoutPageComponent } from './workout-page/workout-page.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ForgetPasswordComponent } from './forget-password/forget-password.compo
     DietPageComponent,
     InitiationPageComponent,
     RegisterComponent,
-    ForgetPasswordComponent
+    ForgetPasswordComponent,
+    WorkoutPageComponent,
   ],
   imports: [
     BrowserModule,
