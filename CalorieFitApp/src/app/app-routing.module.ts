@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { DietPageComponent } from './diet-page/diet-page.component';
 import { RegisterComponent } from './register/register.component';
 const routes: Routes = [
-  { path: '', redirectTo: '/setup', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'setup', component: InitiationPageComponent },
   { path: 'createDietPlan', component: DietPageComponent },
   { path: 'home', component: AppComponent},
