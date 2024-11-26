@@ -13,6 +13,7 @@ export class RegisterComponent {
   vitals: {
     fitnessGoal: string, gender: string,
     height: number, weight: number, age: number,
+    weeklyAvailability: string,
     dailyCaloricExpenditure: number,
     dailyProteinIntake : number,
     dailyCarbIntake : number
@@ -39,6 +40,7 @@ export class RegisterComponent {
 
   ngOnInit(): void {
     this.vitals = this.vitalStatusService.getVitalStatus();
+    //console.log('Vitals:', this.vitals);
   }
   passwordMatchValidator() {
     const password = this.RegisterForm.get('password')?.value || '';

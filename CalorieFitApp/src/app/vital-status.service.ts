@@ -12,6 +12,7 @@ export class VitalStatusService {
       height: number;
       weight: number;
       age: number;
+      weeklyAvailability: string;
       dailyCaloricExpenditure: number;
       dailyProteinIntake : number;
       dailyCarbIntake : number;
@@ -21,17 +22,19 @@ export class VitalStatusService {
   setVitalStatus(
       fitnessGoal: string, gender: string,
       height: number, weight: number, age: number,
+      weeklyAvailability: string,
       dailyCaloricExpenditure: number,
       dailyProteinIntake : number,
       dailyCarbIntake : number): void
   {
-    this.vitalStatus = { fitnessGoal, gender, height, weight, age, dailyCaloricExpenditure, dailyProteinIntake, dailyCarbIntake };
+    this.vitalStatus = { fitnessGoal, gender, height, weight, age, weeklyAvailability, dailyCaloricExpenditure, dailyProteinIntake, dailyCarbIntake };
   }
 
   // Getter to retrieve vital data
   getVitalStatus(): {
     fitnessGoal: string, gender: string,
     height: number, weight: number, age: number,
+    weeklyAvailability: string,
     dailyCaloricExpenditure: number,
     dailyProteinIntake : number,
     dailyCarbIntake : number

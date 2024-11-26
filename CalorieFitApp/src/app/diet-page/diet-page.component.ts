@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -7,5 +8,8 @@ import { Component } from '@angular/core';
   styleUrl: './diet-page.component.css'
 })
 export class DietPageComponent {
-
+    constructor(private router: Router) {}
+    navigateTo(): void {
+        this.router.navigate(['/workout-page']);
+    }
 }
