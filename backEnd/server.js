@@ -73,7 +73,8 @@ app.post('/api/validate-email', async (req, res) => {
     const conn = await pool.getConnection();
     const user = await conn.query('SELECT * FROM user WHERE email = ?', [email]);
     conn.release();
-    if (user) {
+
+    if (user && user.length) {
       res.status(200).json(true);
     } else {
       res.status(404).json(false);
@@ -89,7 +90,7 @@ app.post('/api/reset-password-email', async (req, res) => {
   const { email } = req.body;
   try {
     const conn = await pool.getConnection();
-    const [user] = await conn.query('SELECT * FROM user WHERE email = ?', [email]);
+    const user = await conn.query('SELECT * FROM user WHERE email = ?', [email]);
     conn.release();
     //
     if (user) {

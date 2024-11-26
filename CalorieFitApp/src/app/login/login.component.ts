@@ -45,7 +45,6 @@ export class LoginComponent {
       error: (error) => {
         console.log(error.error.error);
         this.error = error.error.error;
-
         this.showErrorDialog();
       }
     });
