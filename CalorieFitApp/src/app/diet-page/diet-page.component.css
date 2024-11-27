@@ -1,7 +1,48 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%; /* Ensures the body takes up the full height of the viewport */
+  overflow: auto; /* Allows scrolling when content overflows */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Ensures padding and borders are included in element dimensions */
+}
+
 :host {
   display: block;
-  min-height: 100vh;
+  height: calc(100vh - 1px); /* Fixes viewport height calculation issues */
+  margin: 0;
+  padding: 0;
+  overflow: auto; /* Allows scrolling when content overflows */
   background: linear-gradient(135deg, #1a2980 0%, #26d0ce 100%);
+}
+
+/* Custom Scrollbar for Webkit Browsers (Chrome, Edge, Safari) */
+::-webkit-scrollbar {
+  width: 10px; /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Background of the scrollbar track */
+  border-radius: 10px; /* Rounded corners for the track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3498db; /* Color of the scrollbar thumb */
+  border-radius: 10px; /* Rounded corners for the thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2980b9; /* Color when hovering over the scrollbar thumb */
+}
+
+/* Custom Scrollbar for Firefox */
+html {
+  scrollbar-width: thin; /* Makes the scrollbar thinner */
+  scrollbar-color: #3498db #f1f1f1; /* Thumb color and track color */
 }
 
 .meal-plan-container {
@@ -11,14 +52,6 @@
   background-color: rgba(255, 255, 255, 0.95);
   border-radius: 15px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-}
-
-.input-section {
-  margin-bottom: 30px;
-  text-align: center;
-  padding: 20px;
-  background-color: rgba(236, 240, 245, 0.6);
-  border-radius: 10px;
 }
 
 label {
@@ -56,6 +89,11 @@ button {
   font-weight: 500;
   transition: all 0.3s ease;
   margin-top: 15px;
+}
+.button-section {
+  display: flex;
+  justify-content: center; /* Centers the button horizontally */
+  align-items: center; /* Centers the button vertically (if needed) */
 }
 
 button:hover {
@@ -168,7 +206,6 @@ li::before {
   font-weight: bold; /* Makes the text stand out */
 }
 
-
 .nutrition-summary {
   margin-bottom: 20px; 
   padding: 10px;
@@ -176,7 +213,6 @@ li::before {
   border: 1px solid #000000; 
   border-radius: 8px; 
 }
-
 
 @media (max-width: 768px) {
   .protein-info,
@@ -190,3 +226,39 @@ li::before {
   }
 }
 
+.vital-status-container {
+  display: flex;
+  justify-content: center; /* Horizontally center the content */
+  align-items: center; /* Vertically center the content */
+  min-height: 100vh; /* Full viewport height */
+  background: linear-gradient(135deg, #1a2980 0%, #26d0ce 100%); /* Background gradient */
+}
+
+.vital-status-summary {
+  max-width: 700px;
+  padding: 30px;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  text-align: left;
+}
+
+.vital-status-summary h2 {
+  color: #2c3e50;
+  font-size: 1.8em;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.vital-status-summary p {
+  font-size: 1.1em;
+  color: #34495e;
+  margin: 10px 0;
+  line-height: 1.6;
+}
+
+.vital-status-summary p span {
+  font-weight: bold;
+  color: #3498db;
+}
