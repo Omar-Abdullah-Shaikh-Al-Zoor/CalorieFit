@@ -1,0 +1,127 @@
+.main-container {
+    display: flex;
+    min-height: 100vh;
+    background-image: linear-gradient(
+      rgba(30, 144, 255, 0.6), /* This creates a blue overlay */
+      rgba(30, 144, 255, 0.6)
+    ),
+    url('https://image.freepik.com/free-photo/abstract-blur-defocused-fitness-equipment-gym-interior-blurred-photo-background_74190-9963.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  .sidebar {
+    width: 250px;
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .profile-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  
+  .profile-pic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 10px;
+    border: 3px solid #1e90ff;
+  }
+  
+  .profile-pic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .username {
+    color: #333;
+    font-size: 1.1em;
+    font-weight: bold;
+  }
+  
+  .nav-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .nav-btn {
+    padding: 12px 20px;
+    background-color: #1e90ff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+  }
+  
+  .nav-btn:hover {
+    background-color: #187bcd;
+  }
+  
+  .content {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 15vh;
+  }
+  
+  .hero-section {
+    text-align: center;
+    color: white;
+  }
+  
+  .slogan {
+    font-size: 3em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .sub-slogan {
+    font-size: 1.5em;
+    opacity: 0.9;
+  }
+  
+  @media (max-width: 768px) {
+    .main-container {
+      flex-direction: column;
+    }
+  
+    .sidebar {
+      width: 100%;
+      padding: 10px;
+    }
+  
+    .nav-buttons {
+      flex-direction: row;
+      justify-content: center;
+      gap: 10px;
+    }
+  
+    .content {
+      padding: 20px;
+    }
+  
+    .slogan {
+      font-size: 2em;
+    }
+  
+    .sub-slogan {
+      font-size: 1.2em;
+    }
+  }
+  

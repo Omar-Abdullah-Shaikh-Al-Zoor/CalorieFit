@@ -11,6 +11,7 @@ import { RegisterComponent } from './register/register.component';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { WorkoutPageComponent } from './workout-page/workout-page.component';
+import { HomepageComponent } from './homepage/homepage.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { WorkoutPageComponent } from './workout-page/workout-page.component';
     RegisterComponent,
     ForgetPasswordComponent,
     WorkoutPageComponent,
+    HomepageComponent,
   ],
   imports: [
     BrowserModule,

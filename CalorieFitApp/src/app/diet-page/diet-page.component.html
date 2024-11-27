@@ -1,54 +1,222 @@
-<div class="dp-container">
 
-  <div class="diet-plan">
-    <header>
-      <h1>Calorie Fit</h1>
-      <p>Eat right, be bright!</p>
-    </header>
-
-    <div class="user-info">
-      <div class="calorie-loss">
-        <h2>Calorie Loss</h2>
-        <p>Track your daily calorie loss here.</p>
-      </div>
-      <div class="protein-needs">
-        <h2>Protein Needs</h2>
-        <p>Calculate your daily protein requirements.</p>
-      </div>
-    </div>
-
-    <div class="workout-plan">
-      <h2>Workout Plan</h2>
-      <div class="calorie-range">
-        <h3>1000-2000 Calories</h3>
-        <p>Diet plan for this calorie range.</p>
-      </div>
-      <div class="calorie-range">
-        <h3>2000-3000 Calories</h3>
-        <p>Diet plan for this calorie range.</p>
-      </div>
-      <div class="calorie-range">
-        <h3>3000-4000 Calories</h3>
-        <p>Diet plan for this calorie range.</p>
-      </div>
-      <div class="calorie-range">
-        <h3>4000-5000 Calories</h3>
-        <p>Diet plan for this calorie range.</p>
-      </div>
-      <div class="calorie-range">
-        <h3>5000-6000 Calories</h3>
-        <p>Diet plan for this calorie range.</p>
-      </div>
-      <div class="calorie-range">
-        <h3>6000-7000 Calories</h3>
-        <p>Diet plan for this calorie range.</p>
-      </div>
-    </div>
-
-    <div class="workout-button">
-      <button type="button" aria-label="Workout Plan" (click)="navigateTo()">
-        Workout Plan <i class="fas fa-arrow-right"></i>
-      </button>
-    </div>
+<div class="meal-plan-container">
+  <div class="vital-status-summary">
+    <h2>Your Vital Status</h2>
+    <p><strong>Fitness Goal:</strong> {{ fitnessGoal }}</p>
+    <p><strong>Daily Caloric Expenditure:</strong> {{ dailyCaloricExpenditure }} kcal</p>
+    <p><strong>Daily Protein Intake:</strong> {{ dailyProteinIntake }} g</p>
+    <p><strong>Daily Carbohydrate Intake:</strong> {{ dailyCarbIntake }} g</p>
   </div>
+  <div class="button-section">
+    <button (click)="showMealPlan()">Show Meal Plan</button>
+  </div>
+
+  <p class="result">{{ calorieLossResult }}</p>
+
+  <!-- 1000-1999 Calories -->
+  <div class="meal-plan" *ngIf="selectedRange === 1000">
+    <div class="nutrition-summary">
+      <p class="protein-info">Total Protein: ~67g</p>
+      <p class="carbohydrate-info">Total Carbohydrates: ~95g</p>
+    </div>
+    <h2>1000-1999 Calorie Meal Plan</h2>
+    <h3>Breakfast (250 calories)</h3>
+    <ul>
+      <li>1/2 cup oatmeal</li>
+      <li>1 small banana</li>
+      <li>2 egg whites (7g protein)</li>
+    </ul>
+    <h3>Lunch (350 calories)</h3>
+    <ul>
+      <li>4 oz grilled chicken breast (35g protein)</li>
+      <li>2 cups mixed greens</li>
+      <li>1 tbsp light dressing</li>
+      <li>1/2 cup cherry tomatoes</li>
+    </ul>
+    <h3>Dinner (400 calories)</h3>
+    <ul>
+      <li>4 oz fish fillet (25g protein)</li>
+      <li>1 cup steamed vegetables</li>
+      <li>1/2 cup brown rice</li>
+    </ul>
+  </div>
+
+  <!-- 2000-2999 Calories -->
+  <div class="meal-plan" *ngIf="selectedRange === 2000">
+    <div class="nutrition-summary">
+      <p class="protein-info">Total Protein: ~106g</p>
+      <p class="carbohydrate-info">Total Carbohydrates: ~150g</p>
+    </div>
+    <h2>2000-2999 Calorie Meal Plan</h2>
+    <h3>Breakfast (500 calories)</h3>
+    <ul>
+      <li>1 cup oatmeal</li>
+      <li>1 medium banana</li>
+      <li>2 whole eggs (12g protein)</li>
+      <li>1 cup Greek yogurt (10g protein)</li>
+    </ul>
+    <h3>Lunch (700 calories)</h3>
+    <ul>
+      <li>6 oz grilled chicken breast (42g protein)</li>
+      <li>1 cup brown rice</li>
+      <li>1.5 cups mixed vegetables</li>
+      <li>1 tbsp olive oil</li>
+    </ul>
+    <h3>Dinner (800 calories)</h3>
+    <ul>
+      <li>6 oz lean beef (42g protein)</li>
+      <li>1 medium sweet potato</li>
+      <li>2 cups broccoli</li>
+      <li>1/2 cup quinoa</li>
+    </ul>
+  </div>
+
+  <!-- 3000-3999 Calories -->
+  <div class="meal-plan" *ngIf="selectedRange === 3000">
+    <div class="nutrition-summary">
+      <p class="protein-info">Total Protein: ~149g</p>
+      <p class="carbohydrate-info">Total Carbohydrates: ~220g</p>
+    </div>
+    <h2>3000-3999 Calorie Meal Plan</h2>
+    <h3>Breakfast (750 calories)</h3>
+    <ul>
+      <li>2 cups oatmeal</li>
+      <li>2 whole eggs (12g protein)</li>
+      <li>2 egg whites (7g protein)</li>
+      <li>1 large banana</li>
+      <li>2 tbsp peanut butter (8g protein)</li>
+      <li>1 cup Greek yogurt (10g protein)</li>
+    </ul>
+    <h3>Lunch (1000 calories)</h3>
+    <ul>
+      <li>8 oz grilled chicken breast (56g protein)</li>
+      <li>2 cups brown rice</li>
+      <li>2 cups mixed vegetables</li>
+      <li>1 avocado</li>
+      <li>2 tbsp olive oil</li>
+    </ul>
+    <h3>Dinner (1250 calories)</h3>
+    <ul>
+      <li>8 oz salmon fillet (50g protein)</li>
+      <li>2 cups quinoa</li>
+      <li>2 cups sweet potato</li>
+      <li>2 cups broccoli</li>
+      <li>2 tbsp almonds (6g protein)</li>
+    </ul>
+  </div>
+
+  <!-- 4000-4999 Calories -->
+  <div class="meal-plan" *ngIf="selectedRange === 4000">
+    <div class="nutrition-summary">
+      <p class="protein-info">Total Protein: ~244g</p>
+      <p class="carbohydrate-info">Total Carbohydrates: ~320g</p>
+    </div>
+    <h2>4000-4999 Calorie Meal Plan</h2>
+    <h3>Breakfast (1000 calories)</h3>
+    <ul>
+      <li>2 cups oatmeal</li>
+      <li>3 whole eggs (18g protein)</li>
+      <li>2 slices whole grain toast</li>
+      <li>2 bananas</li>
+      <li>3 tbsp peanut butter (12g protein)</li>
+      <li>2 cups Greek yogurt (20g protein)</li>
+    </ul>
+    <h3>Lunch (1500 calories)</h3>
+    <ul>
+      <li>10 oz grilled chicken breast (70g protein)</li>
+      <li>3 cups brown rice</li>
+      <li>2 cups mixed vegetables</li>
+      <li>1 large avocado</li>
+      <li>3 tbsp olive oil</li>
+      <li>1 cup nuts (20g protein)</li>
+    </ul>
+    <h3>Dinner (1500 calories)</h3>
+    <ul>
+      <li>12 oz lean beef (84g protein)</li>
+      <li>3 cups quinoa</li>
+      <li>3 cups sweet potato</li>
+      <li>2 cups broccoli</li>
+      <li>1 cup mixed nuts (20g protein)</li>
+    </ul>
+  </div>
+
+  <!-- 5000+ Calories -->
+  <div class="meal-plan" *ngIf="selectedRange === 5000">
+    <div class="nutrition-summary">
+      <p class="protein-info">Total Protein: ~312g</p>
+      <p class="carbohydrate-info">Total Carbohydrates: ~400g</p>
+    </div>
+    <h2>5000+ Calorie Meal Plan</h2>
+    <h3>Breakfast (1250 calories)</h3>
+    <ul>
+      <li>3 cups oatmeal</li>
+      <li>4 whole eggs (24g protein)</li>
+      <li>3 slices whole grain toast</li>
+      <li>2 large bananas</li>
+      <li>4 tbsp peanut butter (16g protein)</li>
+      <li>2 cups Greek yogurt (20g protein)</li>
+    </ul>
+    <h3>Lunch (1750 calories)</h3>
+    <ul>
+      <li>12 oz grilled chicken breast (84g protein)</li>
+      <li>4 cups brown rice</li>
+      <li>3 cups mixed vegetables</li>
+      <li>2 avocados</li>
+      <li>4 tbsp olive oil</li>
+      <li>1.5 cups mixed nuts (30g protein)</li>
+    </ul>
+    <h3>Dinner (2000 calories)</h3>
+    <ul>
+      <li>14 oz lean beef (98g protein)</li>
+      <li>4 cups quinoa</li>
+      <li>4 cups sweet potato</li>
+      <li>3 cups broccoli</li>
+      <li>2 cups mixed nuts (40g protein)</li>
+     <!-- 6000 Calories -->
+  <div class="meal-plan" *ngIf="selectedRange === 6000">
+    <!-- Nutrition Summary at the Top -->
+    <div class="nutrition-summary">
+      <p class="protein-info">Total Protein: ~370g</p>
+      <p class="carbohydrate-info">Total Carbohydrates: ~500g</p>
+    </div>
+
+    <h2>6000-6999 Calorie Meal Plan</h2>
+    
+    <h3>Breakfast (1500 calories)</h3>
+    <ul>
+      <li>4 cups oatmeal</li>
+      <li>5 whole eggs (30g protein)</li>
+      <li>4 slices whole grain toast</li>
+      <li>3 large bananas</li>
+      <li>5 tbsp peanut butter (20g protein)</li>
+      <li>3 cups Greek yogurt (30g protein)</li>
+    </ul>
+
+    <h3>Lunch (2250 calories)</h3>
+    <ul>
+      <li>14 oz grilled chicken breast (98g protein)</li>
+      <li>5 cups brown rice</li>
+      <li>4 cups mixed vegetables</li>
+      <li>2 large avocados</li>
+      <li>5 tbsp olive oil</li>
+      <li>2 cups mixed nuts (40g protein)</li>
+    </ul>
+
+    <h3>Dinner (2250 calories)</h3>
+    <ul>
+      <li>16 oz lean beef (112g protein)</li>
+      <li>5 cups quinoa</li>
+      <li>5 cups sweet potato</li>
+      <li>4 cups broccoli</li>
+      <li>2 cups mixed nuts (40g protein)</li>
+    </ul>
+  </div>
+</div>
+  
+    </ul>
+  </div>
+</div>
+
+<div class="workout-button-container">
+  <button class="registration-button" (click)="navigateToworkout()">Workout Plan</button>
 </div>
