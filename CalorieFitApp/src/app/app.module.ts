@@ -21,6 +21,7 @@ import { WorkoutPageComponent } from './workout-page/workout-page.component';
     RegisterComponent,
     ForgetPasswordComponent,
     WorkoutPageComponent,
+    DietPageComponent,
   ],
   imports: [
     BrowserModule,
