@@ -7,12 +7,13 @@ import { DietPageComponent } from './diet-page/diet-page.component';
 import { RegisterComponent } from './register/register.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { WorkoutPageComponent } from './workout-page/workout-page.component';
+import { HomepageComponent } from './homepage/homepage.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'setup', component: InitiationPageComponent },
   { path: 'createDietPlan', component: DietPageComponent },
-  { path: 'home', component: AppComponent},
+  { path: 'home', component: HomepageComponent},
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'forget-password', component: ForgetPasswordComponent},

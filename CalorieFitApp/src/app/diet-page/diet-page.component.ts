@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'; // Import Router
 import { VitalStatusService } from '../vital-status.service'; // Import the service
@@ -37,7 +36,6 @@ export class DietPageComponent implements OnInit {
       this.fitnessGoal = 'Unknown';
     }
   }
-
 
   navigateToworkout(): void {
     this.router.navigate(['/workout-page']); // Ensure 'workout-page' is a valid route in your app
